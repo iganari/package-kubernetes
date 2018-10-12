@@ -12,6 +12,6 @@ Kubernetesのサンプル集です
 ## Azure Vote
 
 + サンプル
-    + hogehoge
+    + [sample_vote](https://github.com/iganari/package-kubernetes/tree/master/sample_vote)
 + 簡易説明
     + fugafuga
