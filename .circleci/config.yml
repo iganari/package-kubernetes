@@ -14,6 +14,11 @@ jobs:
       - run:
           name: chk 2
           command: "pwd"
+      - run:
+          name: chk 3
+          command: "git status"
+      - run:
+          command: "git config -l"
 
 
 workflows:
