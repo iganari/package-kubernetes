@@ -19,6 +19,9 @@ jobs:
           command: "git status"
       - run:
           command: "git config -l"
+      - run:
+          name: chkout MRO
+          command: "git remote -v"
 
 
 workflows:
