@@ -8,6 +8,14 @@ jobs:
       - run:
           name: Hello World TEST
           command: "echo 'Hello World !!!'"
+      - run:
+          name: chk 1
+          command: "ls -la"
+      - run:
+          name: chk 2
+          command: "pwd"
+
+
 workflows:
   version: 2
   build_and_test:
