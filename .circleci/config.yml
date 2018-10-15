@@ -18,10 +18,17 @@ jobs:
           name: chk 3
           command: "git status"
       - run:
+          name: chkout config
           command: "git config -l"
       - run:
           name: chkout MRO
           command: "git remote -v"
+      - run:
+          name: chkout
+          command: "git checkout modify-readme-only"
+      - run:
+          name: chkout MRO
+          command: "git status"
 
 
 workflows:
