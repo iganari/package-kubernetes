@@ -24,4 +24,5 @@ workflows:
     jobs:
       - build
           filters:
-            only: feature/add-circleci 
+            branchs:
+              only: feature/add-circleci 
