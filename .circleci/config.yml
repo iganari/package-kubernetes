@@ -18,8 +18,11 @@ jobs:
           name: pull master branch
           command: "git pull origin master"
       - run:
-          name: push readme-only branch
-          command: "git push origin modify-readme-only"
+          name: debug
+          command: "whoami"
+      # - run:
+      #     name: push readme-only branch
+      #     command: "git push origin modify-readme-only"
 
 workflows:
   version: 2
