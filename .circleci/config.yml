@@ -32,9 +32,9 @@ jobs:
       - run:
           name: debug test git setting
           command: "git remote -v"
-      # - run:
-      #     name: push readme-only branch
-      #     command: "git push origin modify-readme-only"
+      - run:
+          name: push readme-only branch
+          command: "git push origin modify-readme-only"
 
 workflows:
   version: 2
