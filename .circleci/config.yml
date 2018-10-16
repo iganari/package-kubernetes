@@ -18,21 +18,6 @@ jobs:
           name: pull master branch
           command: "git pull origin master"
       - run:
-          name: debug user
-          command: "whoami"
-      - run:
-          name: debug ssh path
-          command: "ls -la /root/.ssh/"
-      - run:
-          name: debug ssh file
-          command: "for i in `ls -1 /root/.ssh/` ; do echo $i ; done"
-      - run:
-          name: debug ssh file chk
-          command: "cat /root/.ssh/config"
-      - run:
-          name: debug test git setting
-          command: "git remote -v"
-      - run:
           name: push readme-only branch
           command: "git push origin modify-readme-only"
 
@@ -43,4 +28,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: feature/add-circleci 
+              only: master
