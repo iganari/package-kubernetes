@@ -18,8 +18,11 @@ jobs:
           name: pull master branch
           command: "git pull origin master"
       - run:
-          name: debug
+          name: debug user
           command: "whoami"
+      - run:
+          name: debug ssh path
+          command: "ls -la /root/.ssh/"
       # - run:
       #     name: push readme-only branch
       #     command: "git push origin modify-readme-only"
