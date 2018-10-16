@@ -5,6 +5,9 @@ jobs:
       - image: iganarix/base-alpine
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+              - "62:6d:f6:0d:7d:39:54:b0:b7:d5:0e:ef:43:05:e6:f5"
       - run:
           name: remote update
           command: "git remote update -p"
