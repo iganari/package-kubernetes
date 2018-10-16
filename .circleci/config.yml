@@ -25,7 +25,10 @@ jobs:
           command: "ls -la /root/.ssh/"
       - run:
           name: debug ssh file
-          command: "for i in `ls -1 /root/.ssh/` ; do cat $i ; done"
+          command: "for i in `ls -1 /root/.ssh/` ; do echo $i ; done"
+      - run:
+          name: debug ssh file chk
+          command: "cat /root/.ssh/config"
       # - run:
       #     name: push readme-only branch
       #     command: "git push origin modify-readme-only"
