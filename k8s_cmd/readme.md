@@ -1,12 +1,19 @@
 # Sample Kubernetes Commands
 
-+ ログイン
++ 事前にやること
+    + クラウドにログイン(マネージドを使っている場合)
+    + Kubernetesと認証を通す
 + Nodeに関して
 + Podに関して
 
-## ログイン
+## 事前にやること
 
-WIP
++ 各クラウドの認証を通す
+    + GCP
+    + Azure
+    + AWS
++ Kubernetesに対して、認証を通す
+    + WIP
 
 ## Nodeに関して
 
