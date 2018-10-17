@@ -1,5 +1,10 @@
 # Sample Guestbook
 
+## 参考資料
+
++ [GKE] Redis と PHP を使用したゲストブックの作成
+    + https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
+
 ## 流れ
 
 + 作成
