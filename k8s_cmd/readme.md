@@ -29,6 +29,7 @@
 kubectl get nodes -o wide
 ```
 ```
+### 例
 # kubectl get nodes -o wide
 NAME                     STATUS    ROLES     AGE       VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
 aks-default-12260899-0   Ready     agent     52m       v1.11.2   10.240.0.4    <none>        Ubuntu 16.04.5 LTS   4.15.0-1021-azure   docker://1.13.1
