@@ -1,5 +1,10 @@
 # Sample Vote
 
+## 参考資料
+
++ [AKS] Azure Kubernetes Service (AKS) でのアプリケーションの実行
+    + https://docs.microsoft.com/ja-jp/azure/aks/tutorial-kubernetes-deploy-application
+
 ## 流れ
 
 + 作成
