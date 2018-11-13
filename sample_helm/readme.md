@@ -14,19 +14,6 @@ WIP
 
 ## HELMをインストールする
 
-+ 環境確認
-    + あくまでサンプルです
-
-```
-# cat /etc/os-release 
-NAME="Alpine Linux"
-ID=alpine
-VERSION_ID=3.7.0
-PRETTY_NAME="Alpine Linux v3.7"
-HOME_URL="http://alpinelinux.org"
-BUG_REPORT_URL="http://bugs.alpinelinux.org"
-```
-
 + 最新のリリース情報
     + https://github.com/helm/helm/releases
 
@@ -37,11 +24,14 @@ export latest_tag=$(curl 'https://github.com/helm/helm/releases.atom' | grep '<i
 echo ${latest_tag}
 ```
 
-+ スクリプト
++ スクリプトを使用して、最新のHELM(とtiller)をインストールする
 
-WIP
-
-
+```
+cd ~
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+chmod 0700 get_helm.sh
+./get_helm.sh
+```
 
 + 確認する
 
@@ -55,6 +45,10 @@ Error: could not find tiller
 ```
 
 ## Helmの初期化
+
+:warning: この時点でKubernetesと認証が通っている必要があります
+
++ 初期化コマンドを実行
 
 ```
 helm init
