@@ -1,16 +1,31 @@
 # Sample HELM
 
-## ドキュメント
+WIP
+
+## 公式ドキュメント
 
 + HELM
     + https://docs.helm.sh
-+ 公式インストール方法
++ インストール方法
     + https://docs.helm.sh/using_helm/#installing-helm
 + GitHub
     + https://github.com/helm/helm
 
 
 ## HELMをインストールする
+
++ 環境確認
+    + あくまでサンプルです
+
+```
+# cat /etc/os-release 
+NAME="Alpine Linux"
+ID=alpine
+VERSION_ID=3.7.0
+PRETTY_NAME="Alpine Linux v3.7"
+HOME_URL="http://alpinelinux.org"
+BUG_REPORT_URL="http://bugs.alpinelinux.org"
+```
 
 + 最新のリリース情報
     + https://github.com/helm/helm/releases
@@ -22,40 +37,11 @@ export latest_tag=$(curl 'https://github.com/helm/helm/releases.atom' | grep '<i
 echo ${latest_tag}
 ```
 
-+ ダウンロード
-    + `amd64` の場合
++ スクリプト
 
-```
-mkdir /usr/local/src
-cd /usr/local/src
-wget -O /usr/local/src/helm-${latest_tag}-linux-amd64.tar.gz "https://storage.googleapis.com/kubernetes-helm/helm-${latest_tag}-linux-amd64.tar.gz"
-```
+WIP
 
-+ 展開
 
-```
-tar -zxvf helm-${latest_tag}-linux-amd64.tar.gz
-```
-```
-### 以下のようなディレクトリが作成されます
-
-# ls -1
-helm-v2.11.0-linux-amd64.tar.gz
-linux-amd64
-# tree linux-amd64/
-linux-amd64/
-├── LICENSE
-├── README.md
-├── helm
-└── tiller
-```
-
-+ シンボリックリンクを作成する
-    + :warning: 公式だと `mv` してる
-
-```
-ln -s /usr/local/src/linux-amd64/helm /usr/local/bin/helm
-```
 
 + 確認する
 
@@ -66,4 +52,16 @@ helm version
 # helm version
 Client: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
 Error: could not find tiller
+```
+
+## Helmの初期化
+
+```
+helm init
+```
+
++ 確認
+
+```
+kubectl get pods --namespace kube-system | grep tiller-
 ```
