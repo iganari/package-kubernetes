@@ -60,7 +60,7 @@ Error: could not find tiller
 helm init
 ```
 
-+ 確認
++ `tiller` 用のPodが立ち上がっていることを確認する
 
 ```
 kubectl get pods --namespace kube-system | grep tiller-
