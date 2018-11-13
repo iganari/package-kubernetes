@@ -48,7 +48,22 @@ linux-amd64/
 ├── README.md
 ├── helm
 └── tiller
+```
 
++ シンボリックリンクを作成する
+    + :warning: 公式だと `mv` してる
 
+```
+ln -s /usr/local/src/linux-amd64/helm /usr/local/bin/helm
+```
 
++ 確認する
+
+```
+helm version
+```
+```
+# helm version
+Client: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
+Error: could not find tiller
 ```
