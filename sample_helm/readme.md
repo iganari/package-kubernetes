@@ -127,3 +127,24 @@ NAME                                         READY     STATUS              RESTA
 reeling-unicorn-mariadb-0                    0/1       ContainerCreating   0          1m
 reeling-unicorn-wordpress-6b69994dd5-f4lqb   0/1       ContainerCreating   0          1m
 ```
+
+```
+/opt/hejda/00_all-in-one # helm list
+NAME            REVISION        UPDATED                         STATUS          CHART           APP VERSION     NAMESPACE
+reeling-unicorn 1               Wed Nov 14 09:02:15 2018        DEPLOYED        wordpress-3.3.0 4.9.8           default  
+/opt/hejda/00_all-in-one # kubectl get pod o wide
+No resources found.
+Error from server (NotFound): pods "o" not found
+/opt/hejda/00_all-in-one # kubectl get pod -o wide
+NAME                                         READY     STATUS    RESTARTS   AGE       IP           NODE                         NOMINATED NODE
+reeling-unicorn-mariadb-0                    1/1       Running   0          24m       10.244.2.3   aks-aksallinone-12260899-0   <none>
+reeling-unicorn-wordpress-6b69994dd5-f4lqb   1/1       Running   1          24m       10.244.0.3   aks-aksallinone-12260899-1   <none>
+/opt/hejda/00_all-in-one # 
+```
+
++ リリースの削除コマンド
+
+```
+# helm delete reeling-unicorn
+release "reeling-unicorn" deleted
+```
