@@ -104,6 +104,18 @@ reeling-unicorn-wordpress   LoadBalancer   10.0.75.221   40.115.154.255   80:318
 
 ---> `EXTERNAL-IP` 欄の `40.115.154.255` をブラウザで見てみる(自動で取得したグローバルIPアドレスのため、固定ではありません)
 
+images
+
++ 2. 
+
++ パスワードの取得
+    + 手元の検証機では `base64` コマンドのロングオプションが使用出来なかったので短いオプションに変更しています
+
+```
+### Password取得
+echo Password: $(kubectl get secret --namespace default reeling-unicorn-wordpress -o jsonpath="{.data.wordpr
+ess-password}" | base64 -d)
+```
 
 
 
