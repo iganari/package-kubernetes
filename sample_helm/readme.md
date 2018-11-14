@@ -69,11 +69,45 @@ kubectl get pods --namespace kube-system | grep tiller-
 
 ## WordPressを立ち上げてみる
 
++ helmコマンドを用いて、WordPressをインストールする
+
 ```
 helm inspect stable/wordpress
 ```
 
-+ 確認
++ 以下のような、メッセージが出てきます
+
+```
+NOTES:
+1. Get the WordPress URL:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.                                                            
+        Watch the status with: 'kubectl get svc --namespace default -w reeling-unicorn-wordpress'                                     
+
+  export SERVICE_IP=$(kubectl get svc --namespace default reeling-unicorn-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
+  echo "WordPress URL: http://$SERVICE_IP/"
+  echo "WordPress Admin URL: http://$SERVICE_IP/admin"
+
+2. Login with the following credentials to see your blog
+
+  echo Username: user
+  echo Password: $(kubectl get secret --namespace default reeling-unicorn-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+```
+
++ 1. Get the WordPress URLをやってみる
+
+```
+# kubectl get svc --namespace default -w reeling-unicorn-wordpress
+NAME                        TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
+reeling-unicorn-wordpress   LoadBalancer   10.0.75.221   40.115.154.255   80:31891/TCP,443:31350/TCP   8m
+```
+
+---> `EXTERNAL-IP` 欄の `40.115.154.255` をブラウザで見てみる(自動で取得したグローバルIPアドレスのため、固定ではありません)
+
+
+
+
++ Podを確認する
 
 ```
 # kubectl get pod
