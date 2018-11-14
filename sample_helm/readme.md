@@ -148,3 +148,15 @@ reeling-unicorn-wordpress-6b69994dd5-f4lqb   1/1       Running   1          24m 
 # helm delete reeling-unicorn
 release "reeling-unicorn" deleted
 ```
+
+
++ 確認
+
+```
+# helm list
+# 
+```
+```
+# kubectl get pod -o wide
+No resources found.
+```
