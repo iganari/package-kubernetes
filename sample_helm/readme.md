@@ -48,14 +48,36 @@ Error: could not find tiller
 
 :warning: この時点でKubernetesと認証が通っている必要があります
 
++ Podの確認
+
+```
+# kubectl get pod -o wide
+No resources found.
+```
+
 + 初期化コマンドを実行
 
 ```
 helm init
 ```
 
-+ `tiller` 用のPodが立ち上がっていることを確認する
++ `tiller` 用のPodが立ち上がっていることを確認する(?)
 
 ```
 kubectl get pods --namespace kube-system | grep tiller-
+```
+
+## WordPressを立ち上げてみる
+
+```
+helm inspect stable/wordpress
+```
+
++ 確認
+
+```
+# kubectl get pod
+NAME                                         READY     STATUS              RESTARTS   AGE
+reeling-unicorn-mariadb-0                    0/1       ContainerCreating   0          1m
+reeling-unicorn-wordpress-6b69994dd5-f4lqb   0/1       ContainerCreating   0          1m
 ```
