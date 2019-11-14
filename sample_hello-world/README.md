@@ -11,7 +11,7 @@ https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-ad
 + 実行
 
 ```
-kubectl apply -f load-balancer-example.yaml
+kubectl apply -f load-balancer-deployment.yaml
 ```
 
 + 確認方法
@@ -79,7 +79,7 @@ Labels:         app.kubernetes.io/name=load-balancer-example
 + WIP
 
 ```
-kubectl apply -f service.yaml
+kubectl apply -f load-balancer-service.yaml
 ```
 
 + WIP
