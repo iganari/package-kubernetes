@@ -19,7 +19,7 @@ kubectl create -f service.yaml
 + Service の削除
 
 ```
-kubectl delete -f service-loadbalancer.yaml
+kubectl delete -f service.yaml
 ```
 
 + deployment の削除
