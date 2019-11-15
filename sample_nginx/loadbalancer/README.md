@@ -2,8 +2,16 @@
 
 ## 作成
 
++ deployment の作成
+
 ```
-WIP
+kubectl create -f deployment.yaml
+```
+
++ Service の作成
+
+```
+kubectl create -f service.yaml
 ```
 
 ## 削除
