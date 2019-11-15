@@ -1,4 +1,4 @@
-# loadbalancer
+# Creating a Service of type LoadBalancer
 
 ## 公式ドキュメント
 
