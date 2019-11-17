@@ -30,11 +30,17 @@ gcloud config set project ${_pj}
 gcloud config configurations list
 ```
 
-+ 実験用の VPC ネットワークを作成します
++ 実験用の VPC ネットワークとそれに付随するサブネットワークを作成します。
   
 ```
-gcloud beta compute networks create no-downtime \
+gcloud beta compute networks create no-downtime-nw \
   --subnet-mode=custom
+```
+```
+gcloud beta compute networks subnets create no-downtime-sb \
+  --network no-downtime-nw \
+  --region us-central1 \
+  --range 172.16.0.0/12
 ```
   
   
