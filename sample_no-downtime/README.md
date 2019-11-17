@@ -42,8 +42,14 @@ gcloud beta compute networks subnets create no-downtime-sb \
   --region us-central1 \
   --range 172.16.0.0/12
 ```
-  
-  
+
++ Firewall Rule を作成します。
+
+```
+gcloud compute firewall-rules create no-downtime-nw-allow-internal \
+  --network no-downtime-nw \
+  --allow tcp:0-65535,udp:0-65535,icmp
+```
   
   
   
