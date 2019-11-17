@@ -50,27 +50,38 @@ gcloud compute firewall-rules create no-downtime-nw-allow-internal \
   --network no-downtime-nw \
   --allow tcp:0-65535,udp:0-65535,icmp
 ```
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
++ GKE を Node(n1-standard-1) が合計 3 個を起動します。
+  + Node は preemptible instance を用います。
+
+```
+gcloud beta container clusters create no-downtime \
+  --network=no-downtime-nw \
+  --subnetwork=no-downtime-sb \
+  --zone us-central1 \
+  --num-nodes=1 \
+  --release-channel stable \
+  --preemptible 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
