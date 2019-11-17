@@ -64,6 +64,7 @@ gcloud beta container clusters create no-downtime \
   --preemptible 
 ```
 
+## 実験
 
 
 
@@ -77,7 +78,31 @@ gcloud beta container clusters create no-downtime \
 
 
 
+## リソース削除
 
++ GKE のリソース削除
+
+```
+gcloud beta container clusters delete no-downtime --zone us-central1
+```
+
++ Firewall Rule の削除
+
+```
+WIP
+```
+
++ サブネットの削除
+
+```
+WIP
+```
+
++ VPC ネットワークの削除
+
+```
+WIP
+```
 
 
 
