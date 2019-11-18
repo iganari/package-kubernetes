@@ -373,6 +373,13 @@ kubectl drain --ignore-daemonsets --force gke-no-downtime-default-pool-1894e82b-
 gcloud container clusters resize no-downtime --node-pool default-pool   --num-nodes 2   --region us-central1
 ```
 
++ ノードプールの削除
+
+```
+gcloud container node-pools delete default-pool --cluster no-downtime --region us-central1
+```
+
+
 ## 1.14.8-gke.12 もやってみる
 
 + Master の version を上げる
@@ -384,10 +391,34 @@ gcloud container clusters upgrade [CLUSTER_NAME] --master --cluster-version [CLU
 gcloud container clusters upgrade no-downtime --master --cluster-version 1.14.8-gke.12 --region us-central1
 ```
 
++ Master のバージョンを確認する
+
+```
+gcloud container clusters describe no-downtime --zone us-central1 | grep currentMasterVersion
+```
+```
+$ gcloud container clusters describe no-downtime --zone us-central1 | grep currentMasterVersion
+currentMasterVersion: 1.14.8-gke.12
+```
+
 + pod を確認する
 
 ```
+$ kubectl get pods -o wide
+NAME                                READY   STATUS    RESTARTS   AGE   IP           NODE                                     NOMINATED NODE   READINESS GATES
+nginx-deployment-84645fc577-64jbj   1/1     Running   0          51m   10.60.14.3   gke-no-downtime-add-pool-a7f76d2b-dq99   <none>           <none>
+nginx-deployment-84645fc577-kmmkq   1/1     Running   0          51m   10.60.12.2   gke-no-downtime-add-pool-1a7629c6-7hw2   <none>           <none>
+nginx-deployment-84645fc577-qndlj   1/1     Running   0          51m   10.60.13.3   gke-no-downtime-add-pool-14f515db-002l   <none>           <none>
+```
 
++ node を確認する
+
+```
+$ kubectl get nodes -o wide
+NAME                                     STATUS   ROLES    AGE   VERSION          INTERNAL-IP   EXTERNAL-IP       OS-IMAGE                             KERNEL-VERSION   CONTAINER-RUNTIME
+gke-no-downtime-add-pool-14f515db-002l   Ready    <none>   67m   v1.13.12-gke.8   172.16.0.40   34.69.231.137     Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-no-downtime-add-pool-1a7629c6-7hw2   Ready    <none>   67m   v1.13.12-gke.8   172.16.0.41   104.155.160.114   Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-no-downtime-add-pool-a7f76d2b-dq99   Ready    <none>   67m   v1.13.12-gke.8   172.16.0.39   23.236.63.190     Container-Optimized OS from Google   4.14.138+        docker://18.9.7
 ```
 
 + 新しい node-pool を作成する
@@ -397,13 +428,31 @@ gcloud container clusters upgrade no-downtime --master --cluster-version 1.14.8-
 gcloud container node-pools create [POOL_NAME] --cluster [CLUSTER_NAME]
 
 gcloud container node-pools create add-pool-v2 --cluster no-downtime --num-nodes 1 --region us-central1
+```　
+```
+$ gcloud container node-pools create add-pool-v2 --cluster no-downtime --num-nodes 1 --region us-central1
+WARNING: Newly created clusters and node-pools will have node auto-upgrade enabled by default. This can be disabled using the `--no-enable-autoupgrade` flag.
+WARNING: Starting in 1.12, new node pools will be created with their legacy Compute Engine instance metadata APIs disabled by default. To create a node pool with legacy instance metadata endpoints disabled, run `node-pools create` with the flag `--metadata disable-legacy-endpoints=true`.
+This will enable the autorepair feature for nodes. Please see https://cloud.google.com/kubernetes-engine/docs/node-auto-repair for more information on node autorepairs.
+Creating node pool add-pool-v2...done.
+Created [https://container.googleapis.com/v1/projects/ca-igarashi-test/zones/us-central1/clusters/no-downtime/nodePools/add-pool-v2].
+NAME         MACHINE_TYPE   DISK_SIZE_GB  NODE_VERSION
+add-pool-v2  n1-standard-1  100           1.14.8-gke.12
 ```
 
-+ pod を確認する
+
++ node を確認する
 
 ```
-
+$ kubectl get nodes -o wide
+NAME                                     STATUS   ROLES    AGE   VERSION          INTERNAL-IP   EXTERNAL-IP       OS-IMAGE                             KERNEL-VERSION   CONTAINER-RUNTIME
+gke-no-downtime-add-pool-14f515db-002l   Ready    <none>   67m   v1.13.12-gke.8   172.16.0.40   34.69.231.137     Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-no-downtime-add-pool-1a7629c6-7hw2   Ready    <none>   67m   v1.13.12-gke.8   172.16.0.41   104.155.160.114   Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-no-downtime-add-pool-a7f76d2b-dq99   Ready    <none>   67m   v1.13.12-gke.8   172.16.0.39   23.236.63.190     Container-Optimized OS from Google   4.14.138+        docker://18.9.7
 ```
+
+---> 途中でプロジェクトがつぶれちゃったので検証出来ず
+
 
 + drain を仕掛ける
 
