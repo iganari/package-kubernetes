@@ -129,7 +129,7 @@ nginx-deployment-84645fc577-rzgkw   1/1     Running   0          3m25s   10.60.2
 + Service を作成します。
 
 ```
-vim nginx-service.yaml
+vim nginx-service-clusterip.yaml
 ```
 ```
 apiVersion: v1
