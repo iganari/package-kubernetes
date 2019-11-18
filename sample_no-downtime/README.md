@@ -66,9 +66,106 @@ gcloud beta container clusters create no-downtime \
   --cluster-version=1.12.10-gke.17
 ```
 
++ kubectl コマンドにて確認を行います。
+  + Node のバージョンが指定したバージョンになっていることを確認出来ました。
+
+```
+kubectl get nodes
+NAME                                         STATUS   ROLES    AGE   VERSION
+gke-no-downtime-default-pool-1894e82b-2b2j   Ready    <none>   57s   v1.12.10-gke.17
+gke-no-downtime-default-pool-8d4eb0ed-78r1   Ready    <none>   57s   v1.12.10-gke.17
+gke-no-downtime-default-pool-d5a8d6e0-vmvd   Ready    <none>   76s   v1.12.10-gke.17
+```
+
+## Deployment を作成します
+
++ `nginx-deployment.yaml` を作成します。
+
+```
+vim nginx-deployment.yaml
+```
+```
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17.5   # https://hub.docker.com/_/nginx
+        ports:
+        - containerPort: 80
+
+```
+
++ deployment を作製します。
+
+```
+kubectl create -f nginx-deployment.yaml
+```
+
++ Pod の確認を行います。
+  + 出力結果より、どの Node に Pod が乗っているかが分かります。
+
+```
+$ kubectl get pod -o wide
+NAME                                READY   STATUS    RESTARTS   AGE     IP          NODE                                         NOMINATED NODE
+nginx-deployment-84645fc577-8ctd7   1/1     Running   0          3m25s   10.60.1.3   gke-no-downtime-default-pool-8d4eb0ed-78r1   <none>
+nginx-deployment-84645fc577-lkwnm   1/1     Running   0          3m25s   10.60.1.2   gke-no-downtime-default-pool-8d4eb0ed-78r1   <none>
+nginx-deployment-84645fc577-rzgkw   1/1     Running   0          3m25s   10.60.2.2   gke-no-downtime-default-pool-1894e82b-2b2j   <none>
+```
+
++ Service を作成します。
+
+```
+vim nginx-service.yaml
+```
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: "http-port"
+    protocol: "TCP"
+    port: 8080
+    targetPort: 80
+  selector:
+    app: nginx
+```
+
++ service を作製します。
+
+```
+kubectl create -f nginx-service.yaml
+```
+
++ service の確認をします。
+
+```
+$ kubectl get service
+NAME            TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+kubernetes      ClusterIP   10.63.240.1    <none>        443/TCP    34m
+nginx-service   ClusterIP   10.63.241.52   <none>        8080/TCP   30s
+```
+
+
 ## 実験
 
-
+WIP
 
 
 
