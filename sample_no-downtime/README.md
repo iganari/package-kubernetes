@@ -62,7 +62,6 @@ gcloud beta container clusters create no-downtime \
   --subnetwork=no-downtime-sb \
   --zone us-central1 \
   --num-nodes=1 \
-  --release-channel stable \
   --preemptible \
   --cluster-version=1.12.10-gke.17
 ```
