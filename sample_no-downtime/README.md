@@ -163,13 +163,38 @@ nginx-serv-lb   LoadBalancer   10.63.251.38   34.67.125.234   8080:32387/TCP   6
 ```
 
 
----> 出来ているが疎通が
-
-
 ## 実験
 
-WIP
++ クラスターのバージョンの確認
 
+```
+gcloud container clusters describe no-downtime --zone us-central1
+---> これだと出力が多いので、 grep します
+
+gcloud container clusters describe no-downtime --zone us-central1 | grep version
+```
+```
+### 例
+
+$ gcloud container clusters describe no-downtime --zone us-central1 | grep version
+  version: 1.12.10-gke.17
+```
+
+
+
+
+
++ 再度、 Node のバージョンを確認します。
+
+```
+$ kubectl get node
+NAME                                         STATUS   ROLES    AGE    VERSION
+gke-no-downtime-default-pool-1894e82b-2b2j   Ready    <none>   140m   v1.12.10-gke.17
+gke-no-downtime-default-pool-8d4eb0ed-78r1   Ready    <none>   140m   v1.12.10-gke.17
+gke-no-downtime-default-pool-d5a8d6e0-vmvd   Ready    <none>   141m   v1.12.10-gke.17
+```
+
++ 再度、 Pod のバージョンを確認します。
 
 
 
