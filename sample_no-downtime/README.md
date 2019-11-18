@@ -262,6 +262,110 @@ gcloud container clusters resize no-downtime --node-pool default-pool \
 
 ```
 
++ 気づき
+  + node の数を増やすだけだと、バージョンは上がらない
+  
++ node-pool 単位で増やしてみる
+  + add-pool という Node pool を増やす
+
+```
+### 例
+gcloud container node-pools create [POOL_NAME] --cluster [CLUSTER_NAME]
+
+gcloud container node-pools create add-pool --cluster no-downtime --num-nodes 1 --region us-central1
+```
+
++ 確認
+  + 新しい node-poolはmaster と同じversionになっている(なぜかはちゃんとdocumentを確認する)
+
+```
+$ kubectl get node -o wide
+NAME                                         STATUS                     ROLES    AGE    VERSION           INTERNAL-IP   EXTERNAL-IP       OS-IMAGE                             KERNEL-VERSION   CONTAINER-RUNTIME
+gke-no-downtime-add-pool-14f515db-002l       Ready                      <none>   109s   v1.13.12-gke.8    172.16.0.40   34.69.231.137     Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-no-downtime-add-pool-1a7629c6-7hw2       Ready                      <none>   110s   v1.13.12-gke.8    172.16.0.41   104.155.160.114   Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-no-downtime-add-pool-a7f76d2b-dq99       Ready                      <none>   108s   v1.13.12-gke.8    172.16.0.39   23.236.63.190     Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-no-downtime-default-pool-1894e82b-rmxd   Ready,SchedulingDisabled   <none>   84m    v1.12.10-gke.17   172.16.0.26   35.232.88.172     Container-Optimized OS from Google   4.14.138+        docker://17.3.2
+gke-no-downtime-default-pool-8d4eb0ed-qpbw   Ready                      <none>   84m    v1.12.10-gke.17   172.16.0.27   34.66.72.175      Container-Optimized OS from Google   4.14.138+        docker://17.3.2
+gke-no-downtime-default-pool-d5a8d6e0-564s   Ready                      <none>   84m    v1.12.10-gke.17   172.16.0.29   35.238.191.152    Container-Optimized OS from Google   4.14.138+        docker://17.3.2
+igarashi_toru@cloudshell:~ (ca-igarashi-test)$ kubectl get pod -o wide
+NAME                                READY   STATUS    RESTARTS   AGE   IP          NODE                                         NOMINATED NODE   READINESS GATES
+nginx-deployment-84645fc577-4rqhd   1/1     Running   0          15m   10.60.7.5   gke-no-downtime-default-pool-8d4eb0ed-qpbw   <none>           <none>
+nginx-deployment-84645fc577-7pjfs   1/1     Running   0          15m   10.60.9.5   gke-no-downtime-default-pool-d5a8d6e0-564s   <none>           <none>
+nginx-deployment-84645fc577-zqsrm   1/1     Running   0          15m   10.60.7.6   gke-no-downtime-default-pool-8d4eb0ed-qpbw   <none>           <none>
+```
+
+
++ Pod がどの Node にあるか確認
+  + gke-no-downtime-default-pool-8d4eb0ed-qpbw
+    + default-pool
+  + gke-no-downtime-default-pool-d5a8d6e0-564s
+    + default-pool
+  + gke-no-downtime-default-pool-8d4eb0ed-qpbw
+    + default-pool
+
+```
+$ kubectl get pods -o wide
+NAME                                READY   STATUS    RESTARTS   AGE   IP          NODE                                         NOMINATED NODE   READINESS GATES
+nginx-deployment-84645fc577-4rqhd   1/1     Running   0          18m   10.60.7.5   gke-no-downtime-default-pool-8d4eb0ed-qpbw   <none>           <none>
+nginx-deployment-84645fc577-7pjfs   1/1     Running   0          18m   10.60.9.5   gke-no-downtime-default-pool-d5a8d6e0-564s   <none>           <none>
+nginx-deployment-84645fc577-zqsrm   1/1     Running   0          18m   10.60.7.6   gke-no-downtime-default-pool-8d4eb0ed-qpbw   <none>           <none>
+```
+
++ PodDisruptionBudget を登録する
+  + https://qiita.com/tkusumi/items/946b0f31931d21a78058
+
+```
+vim podDisruptionbudget.yaml
+```
+```
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: myapp
+spec:
+  # 最大で無効状態な Pod は 1 に設定。これを超えては退去させられない
+  maxUnavailable: 1
+  # 対象 Pod のセレクタ
+  selector:
+    matchLabels:
+      run: nginx
+```
+```
+kubectl create -f podDisruptionbudget.yaml
+```
+
+```
+$ kubectl get pdb
+NAME    MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+myapp   N/A             1                 0                     73m
+```
+
++ default-pool のnodeをdrainする
+
+```
+kubectl drain --ignore-daemonsets --force gke-no-downtime-default-pool-1894e82b-rmxd
+kubectl drain --ignore-daemonsets --force gke-no-downtime-default-pool-8d4eb0ed-qpbw
+kubectl drain --ignore-daemonsets --force gke-no-downtime-default-pool-d5a8d6e0-564s
+```
+
+```
+$ kubectl get pdb
+NAME    MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+myapp   N/A             1                 0                     78m
+```
+
++ Pod が乗っている Node を確認する
+  + あたらしいノードに写ってる
+
+```
+$ kubectl get pods -o wide
+NAME                                READY   STATUS    RESTARTS   AGE     IP           NODE                                     NOMINATED NODE   READINESS GATES
+nginx-deployment-84645fc577-64jbj   1/1     Running   0          2m11s   10.60.14.3   gke-no-downtime-add-pool-a7f76d2b-dq99   <none>           <none>
+nginx-deployment-84645fc577-kmmkq   1/1     Running   0          2m11s   10.60.12.2   gke-no-downtime-add-pool-1a7629c6-7hw2   <none>           <none>
+nginx-deployment-84645fc577-qndlj   1/1     Running   0          83s     10.60.13.3   gke-no-downtime-add-pool-14f515db-002l   <none>           <none>
+```
+
+
 + nodeの削除
 
 ```
