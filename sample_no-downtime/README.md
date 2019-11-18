@@ -190,9 +190,36 @@ gke-no-downtime-default-pool-8d4eb0ed-78r1   Ready    <none>   140m   v1.12.10-g
 gke-no-downtime-default-pool-d5a8d6e0-vmvd   Ready    <none>   141m   v1.12.10-gke.17
 ```
 
-+ 再度、 Pod のバージョンを確認します。
++ クラスタ マスターのバージョンをアップグレードするには、まず次のコマンドを実行して利用可能なバージョンを表示します
+  + https://cloud.google.com/kubernetes-engine/docs/how-to/upgrading-a-cluster#upgrade_master
 
-
+```
+gcloud container get-server-config --region us-central1
+```
+```
+$ gcloud container get-server-config --region us-central1
+Fetching server config for us-central1
+defaultClusterVersion: 1.13.11-gke.14
+defaultImageType: COS
+validImageTypes:
+- COS
+- UBUNTU
+- COS_CONTAINERD
+- UBUNTU_CONTAINERD
+validMasterVersions:
+- 1.14.8-gke.12
+- 1.14.7-gke.23
+- 1.13.12-gke.8
+- 1.13.11-gke.14
+- 1.12.10-gke.17
+validNodeVersions:
+- 1.14.8-gke.12
+- 1.14.8-gke.2
+.
+.
+.
+割愛
+```
 
 
 
