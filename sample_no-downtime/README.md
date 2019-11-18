@@ -165,7 +165,7 @@ nginx-serv-lb   LoadBalancer   10.63.251.38   34.67.125.234   8080:32387/TCP   6
 
 ## 実験
 
-+ クラスターのバージョンの確認
++ クラスターのバージョンの確認します。
 
 ```
 gcloud container clusters describe no-downtime --zone us-central1
@@ -180,11 +180,7 @@ $ gcloud container clusters describe no-downtime --zone us-central1 | grep versi
   version: 1.12.10-gke.17
 ```
 
-
-
-
-
-+ 再度、 Node のバージョンを確認します。
++ Node のバージョンを確認します。
 
 ```
 $ kubectl get node
