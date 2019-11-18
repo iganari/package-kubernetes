@@ -253,13 +253,24 @@ nginx-deployment-84645fc577-lkwnm   1/1     Running   0          3h33m
 ```
 ### 例
 gcloud container clusters resize [CLUSTER_NAME] --node-pool [POOL_NAME] \
-    --num-nodes [NUM_NODES]
+  --num-nodes [NUM_NODES]
 
 
-gcloud container clusters resize [CLUSTER_NAME] --node-pool [POOL_NAME] \
-    --num-nodes [NUM_NODES]
+gcloud container clusters resize no-downtime --node-pool default-pool \
+  --num-nodes 2 \
+  --region us-central1
 
 ```
+
++ nodeの削除
+
+```
+kubectl drain --ignore-daemonsets --force gke-no-downtime-default-pool-1894e82b-2b2j gke-no-downtime-default-pool-1894e82b-c41w
+gcloud container clusters resize no-downtime --node-pool default-pool   --num-nodes 2   --region us-central1
+```
+
+
+
 
 + Node pool を Master に追従させる
   + default-pool は後ほど修正する
