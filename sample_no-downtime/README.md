@@ -221,9 +221,55 @@ validNodeVersions:
 割愛
 ```
 
++ Master の version を上げる
+
+```
+### 例
+gcloud container clusters upgrade [CLUSTER_NAME] --master --cluster-version [CLUSTER_VERSION]
 
 
+gcloud container clusters upgrade no-downtime --master --cluster-version 1.13.12-gke.8 --region us-central1
+```
 
++ node と Pod を再度、確認する
+
+```
+$ kubectl get node
+NAME                                         STATUS   ROLES    AGE     VERSION
+gke-no-downtime-default-pool-1894e82b-2b2j   Ready    <none>   71m     v1.12.10-gke.17
+gke-no-downtime-default-pool-8d4eb0ed-78r1   Ready    <none>   3h46m   v1.12.10-gke.17
+gke-no-downtime-default-pool-d5a8d6e0-vmvd   Ready    <none>   3h46m   v1.12.10-gke.17
+```
+```
+$ kubectl get pod
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-84645fc577-8ctd7   1/1     Running   0          3h33m
+nginx-deployment-84645fc577-c6djz   1/1     Running   0          74m
+nginx-deployment-84645fc577-lkwnm   1/1     Running   0          3h33m
+```
+
++ クラスタのサイズ変更
+
+```
+### 例
+gcloud container clusters resize [CLUSTER_NAME] --node-pool [POOL_NAME] \
+    --num-nodes [NUM_NODES]
+
+
+gcloud container clusters resize [CLUSTER_NAME] --node-pool [POOL_NAME] \
+    --num-nodes [NUM_NODES]
+
+```
+
++ Node pool を Master に追従させる
+  + default-pool は後ほど修正する
+
+```
+### 例
+gcloud container clusters upgrade [CLUSTER_NAME] --node-pool=[NODE-POOL-NAME] --cluster-version [CLUSTER_VERSION]
+
+gcloud container clusters upgrade no-downtime --node-pool=default-pool	 --cluster-version 1.13.11-gke.14 --region us-central1
+```
 
 
 
