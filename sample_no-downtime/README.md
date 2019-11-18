@@ -54,7 +54,7 @@ gcloud compute firewall-rules create no-downtime-nw-allow-internal \
 + GKE を Node(n1-standard-1) が合計 3 個を起動します。
   + Node は preemptible instance を用います。
   + クラスタのバージョンをあえて、古いバージョンに指定して作製します。
-    + 2019/11/18 現在は デフォルトのバージョンは `1.13.11-gke.14` です。
+    + 2019/11/18 現在は デフォルトのバージョンは `1.13.11-gke.14` であり、選択出来るバージョンで最も古いのは `1.12.10-gke.17` です。
 
 ```
 gcloud beta container clusters create no-downtime \
