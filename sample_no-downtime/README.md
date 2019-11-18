@@ -129,38 +129,41 @@ nginx-deployment-84645fc577-rzgkw   1/1     Running   0          3m25s   10.60.2
 + Service を作成します。
 
 ```
-vim nginx-service-clusterip.yaml
+vim nginx-service-loadbalancer.yaml
 ```
 ```
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx-serv-lb
 spec:
-  type: ClusterIP
+  selector:
+    app: nginx-deployment
   ports:
-  - name: "http-port"
-    protocol: "TCP"
+  - protocol: TCP
     port: 8080
     targetPort: 80
-  selector:
-    app: nginx
+  type: LoadBalancer
 ```
 
 + service を作製します。
 
 ```
-kubectl create -f nginx-service.yaml
+kubectl create -f nginx-service-loadbalancer.yaml
 ```
 
 + service の確認をします。
 
 ```
 $ kubectl get service
-NAME            TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-kubernetes      ClusterIP   10.63.240.1    <none>        443/TCP    34m
-nginx-service   ClusterIP   10.63.241.52   <none>        8080/TCP   30s
+$ kubectl get service
+NAME            TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)          AGE
+kubernetes      ClusterIP      10.63.240.1    <none>          443/TCP          54m
+nginx-serv-lb   LoadBalancer   10.63.251.38   34.67.125.234   8080:32387/TCP   67s
 ```
+
+
+---> 出来ているが疎通が
 
 
 ## 実験
