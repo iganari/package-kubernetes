@@ -373,6 +373,63 @@ kubectl drain --ignore-daemonsets --force gke-no-downtime-default-pool-1894e82b-
 gcloud container clusters resize no-downtime --node-pool default-pool   --num-nodes 2   --region us-central1
 ```
 
+## 1.14.8-gke.12 もやってみる
+
++ Master の version を上げる
+
+```
+### 例
+gcloud container clusters upgrade [CLUSTER_NAME] --master --cluster-version [CLUSTER_VERSION]
+
+gcloud container clusters upgrade no-downtime --master --cluster-version 1.14.8-gke.12 --region us-central1
+```
+
++ pod を確認する
+
+```
+
+```
+
++ 新しい node-pool を作成する
+
+```
+### 例
+gcloud container node-pools create [POOL_NAME] --cluster [CLUSTER_NAME]
+
+gcloud container node-pools create add-pool-v2 --cluster no-downtime --num-nodes 1 --region us-central1
+```
+
++ pod を確認する
+
+```
+
+```
+
++ drain を仕掛ける
+
+```
+
+```
+
++ pod を確認する
+
+```
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
