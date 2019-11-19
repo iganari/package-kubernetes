@@ -428,7 +428,8 @@ gke-no-downtime-add-pool-a7f76d2b-dq99   Ready    <none>   67m   v1.13.12-gke.8 
 gcloud container node-pools create [POOL_NAME] --cluster [CLUSTER_NAME]
 
 gcloud container node-pools create add-pool-v2 --cluster no-downtime --num-nodes 1 --region us-central1
-```　
+```
+
 ```
 $ gcloud container node-pools create add-pool-v2 --cluster no-downtime --num-nodes 1 --region us-central1
 WARNING: Newly created clusters and node-pools will have node auto-upgrade enabled by default. This can be disabled using the `--no-enable-autoupgrade` flag.
