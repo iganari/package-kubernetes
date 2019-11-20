@@ -1,0 +1,15 @@
+# https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-serv-lb
+spec:
+  selector:
+    app: nginx-deployment
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  type: LoadBalancer
+  
