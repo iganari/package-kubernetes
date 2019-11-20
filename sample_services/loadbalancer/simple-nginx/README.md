@@ -63,7 +63,7 @@ nginx-serv-lb   LoadBalancer   10.31.254.139   35.232.68.31   8080:31511/TCP   8
 
 ## 確認
 
-![]()
+![](./sample-browser.png)
 
 
 
