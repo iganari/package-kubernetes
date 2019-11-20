@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  srategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      # - image: mysql:5.6
+      -image: mysql: 5.7.28    # https://hub.docker.com/_/mysql
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: p@ssword
+        ports:
+          - containerPort: 3306
+            name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-laim
