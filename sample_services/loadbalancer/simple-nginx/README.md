@@ -60,3 +60,45 @@ NAME            TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)          A
 kubernetes      ClusterIP      10.31.240.1     <none>         443/TCP          11m
 nginx-serv-lb   LoadBalancer   10.31.254.139   35.232.68.31   8080:31511/TCP   86s
 ```
+
+## 確認
+
+![]()
+
+
+
+## 削除
+
+### Service
+
++ Service の削除
+
+```
+kubectl delete -f nginx-service-loadbalancer.yaml
+OR
+kubectl delete nginx-serv-lb 
+```
+
++ 確認
+  + `nginx-serv-lb` が消えているのが分かります。
+
+```
+$ kubectl get service
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.31.240.1   <none>        443/TCP   31m
+```
+
+### deployment
+
+```
+kubectl delete -f nginx-deployment.yaml
+```
+
++ 確認
+  + `nginx-deployment` が消えているのが分かります。
+
+```
+$ kubectl get deployment
+No resources found.
+```
+
