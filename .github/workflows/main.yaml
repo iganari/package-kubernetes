@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: ls && pwd && which git
+      run: ls && pwd && which git && git status && git remote -v
     - name: Run a multi-line script
       env:
         SECRET_VARIABLE: ${{ secrets.VAR_TEST }}
