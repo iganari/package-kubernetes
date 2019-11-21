@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branchs:
+      - master
+      - feature/add-actions-yaml # For test branch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      env:
+        SECRET_VARIABLE: ${{ secrets.VAR_TEST }}
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+        echo ${VAR_TEST}
