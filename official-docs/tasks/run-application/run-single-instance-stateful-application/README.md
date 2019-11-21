@@ -1,19 +1,29 @@
 # 単一レプリカのステートフルアプリケーションを実行する
 
-公式ドキュメント
+## これは何?
 
-https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
++ 公式ドキュメント
+  + https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application
++ 上記の公式ドキュメントを GKE で実際に動かすサンプルです。
+  + AKS も後日追記する予定です。
++ 関連ブログ
+  + :warning: 作成中です。
 
 ## Kubernetes 環境構築
 
-+ 以下をやりかたで GKE を使用します。
++ 以下をやり方で GKE を構築します。
   + https://github.com/iganari/package-gcp/blob/master/kubernetes/sample-basic/gcloud/README.ja.md
 
 ## 構築
 
 ### ドキュメントとの相違点
 
-+ Persistent Volume は作成しません。
++ 変更点
+  + Persistent Volume は作成しません。
+  + Persistent Volume Claim の記述をすこし修正します。
++ Why
+  + PVC のみで動作します。
+  + :warning: 後日、詳細を記載します。
 
 ### Persistent Volume Claim
 
@@ -90,21 +100,3 @@ NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
 kubernetes   ClusterIP   10.31.240.1   <none>        443/TCP    66m
 mysql        ClusterIP   None          <none>        3306/TCP   12s
 ```
-
-
-
-
-
-
-## 参考 URL
-
-+ MySQL 5.7 on CentOS7 で起動時にこける問題
-  + https://qiita.com/shimacpyon/items/50d9a688f88db416d518
-
-
-
-
-
-
-
-
