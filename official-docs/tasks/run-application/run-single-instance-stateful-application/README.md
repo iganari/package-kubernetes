@@ -30,12 +30,12 @@
 + デプロイ
 
 ```
-kubectl create -f mysql-pv-pvc.yaml
+kubectl create -f gke-mysql-pv-pvc.yaml
 ```
 ```
 ### 例
 
-$ kubectl create -f mysql-pv-pvc.yaml
+$ kubectl create -f gke-mysql-pv-pvc.yaml
 persistentvolumeclaim/mysql-pv-claim created
 ```
 
@@ -57,10 +57,10 @@ mysql-pv-claim   Bound    mysql-pv-volume   20Gi       RWO            manual    
 + デプロイ
 
 ```
-kubectl create -f mysql-deployment.yaml
+kubectl create -f gke-mysql-deployment.yaml
 ```
 ```
-$ kubectl create -f mysql-deployment.yaml
+$ kubectl create -f gke-mysql-deployment.yaml
 deployment.apps/mysql created
 ```
 
@@ -82,10 +82,10 @@ mysql   0/1     1            0           72s
 + デプロイ
 
 ```
-kubectl create -f mysql-service.yaml
+kubectl create -f gke-mysql-service.yaml
 ```
 ```
-$ kubectl create -f mysql-service.yaml
+$ kubectl create -f gke-mysql-service.yaml
 service/mysql created
 ```
 
