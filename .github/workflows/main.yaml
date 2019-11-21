@@ -1,4 +1,6 @@
-name: Pull Master Branch
+# https://gist.github.com/iganari/e79f80cd13340642913418a3b1ec16f5
+
+name: Pull Master Branch on modify-readme-only Branch
 
 on:
   push:
