@@ -13,8 +13,7 @@ https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-ap
 
 ### ドキュメントとの相違点
 
-+ Persistent Volume は作成しません
-  + 
++ Persistent Volume は作成しません。
 
 ### Persistent Volume Claim
 
