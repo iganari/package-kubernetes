@@ -25,23 +25,22 @@ echo ${latest_tag}
 ```
 
 + スクリプトを使用して、最新のHELM(とtiller)をインストールする
+  + 参考: https://helm.sh/docs/intro/install/#from-script
 
 ```
-cd ~
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
 chmod 0700 get_helm.sh
 ./get_helm.sh
 ```
 
-+ 確認する
++ 意図した Helm のバージョンがインストール出来ているか確認する
 
 ```
 helm version
 ```
 ```
 # helm version
-Client: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
-Error: could not find tiller
+version.BuildInfo{Version:"v3.0.0", GitCommit:"e29ce2a54e96cd02ccfce88bee4f58bb6e2a28b6", GitTreeState:"clean", GoVersion:"go1.13.4"}
 ```
 
 ## Helmの初期化
@@ -52,10 +51,24 @@ Error: could not find tiller
 
 ```
 # kubectl get pod -o wide
-No resources found.
+No resources found in default namespace.
 ```
 
++ コマンド
+
+```
+helm ls
+```
+```
+# helm ls
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+```
+
+
+
+
 + 初期化コマンドを実行
+  + いらないかも?
 
 ```
 helm init
