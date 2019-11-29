@@ -34,6 +34,7 @@ chmod 0700 get_helm.sh
 ```
 
 + 意図した Helm のバージョンがインストール出来ているか確認する
+  + 2019/11/29 時点では v3.0.0 が最新バージョン
 
 ```
 helm version
@@ -64,112 +65,146 @@ helm ls
 NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
 ```
 
-
-
-
-+ 初期化コマンドを実行
-  + いらないかも?
++ パブリック公開されている WordPress の chart(s) を helm コマンドで確認する 
+  + GitHub: https://github.com/helm/charts/tree/master/stable/wordpress
 
 ```
-helm init
+helm search hub wordpress
+```
+```
+$ helm search hub wordpress
+URL                                                     CHART VERSION   APP VERSION     DESCRIPTION
+https://hub.helm.sh/charts/bitnami/wordpress            8.0.1           5.3.0           Web publishing platform for building blogs and ...
+https://hub.helm.sh/charts/presslabs/wordpress-...      v0.6.3          v0.6.3          Presslabs WordPress Operator Helm Chart
+https://hub.helm.sh/charts/presslabs/wordpress-...      v0.7.3          v0.7.3          A Helm chart for deploying a WordPress site on ...
 ```
 
-+ `tiller` 用のPodが立ち上がっていることを確認する(?)
++ helm コマンドで Wordpress をインストールする
 
 ```
-kubectl get pods --namespace kube-system | grep tiller-
+helm repo add bitnami https://charts.bitnami.com
+helm install bitnami/wordpress --version 8.0.1
+helm install iganari-wordpress bitnami/wordpress --version 8.0.1
 ```
-
-## WordPressを立ち上げてみる
-
-+ helmコマンドを用いて、WordPressをインストールする
-
 ```
-helm inspect stable/wordpress
-```
-
-+ 以下のような、メッセージが出てきます
-
-```
+$ helm install iganari-wordpress bitnami/wordpress --version 8.0.1
+NAME: iganari-wordpress
+LAST DEPLOYED: Fri Nov 29 13:36:37 2019
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
 NOTES:
 1. Get the WordPress URL:
 
-  NOTE: It may take a few minutes for the LoadBalancer IP to be available.                                                            
-        Watch the status with: 'kubectl get svc --namespace default -w reeling-unicorn-wordpress'                                     
-
-  export SERVICE_IP=$(kubectl get svc --namespace default reeling-unicorn-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w iganari-wordpress'
+  export SERVICE_IP=$(kubectl get svc --namespace default iganari-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
   echo "WordPress URL: http://$SERVICE_IP/"
   echo "WordPress Admin URL: http://$SERVICE_IP/admin"
 
 2. Login with the following credentials to see your blog
 
   echo Username: user
-  echo Password: $(kubectl get secret --namespace default reeling-unicorn-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+  echo Password: $(kubectl get secret --namespace default iganari-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
 ```
-
-+ 1. Get the WordPress URLをやってみる
-
-```
-# kubectl get svc --namespace default -w reeling-unicorn-wordpress
-NAME                        TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
-reeling-unicorn-wordpress   LoadBalancer   10.0.75.221   40.115.154.255   80:31891/TCP,443:31350/TCP   8m
-```
-
----> `EXTERNAL-IP` 欄の `40.115.154.255` をブラウザで見てみる(自動で取得したグローバルIPアドレスのため、固定ではありません)
-
-images
-
-+ 2. 
-
-+ パスワードの取得
-    + 手元の検証機では `base64` コマンドのロングオプションが使用出来なかったので短いオプションに変更しています
-
-```
-### Password取得
-echo Password: $(kubectl get secret --namespace default reeling-unicorn-wordpress -o jsonpath="{.data.wordpr
-ess-password}" | base64 -d)
-```
-
-
-
-+ Podを確認する
-
-```
-# kubectl get pod
-NAME                                         READY     STATUS              RESTARTS   AGE
-reeling-unicorn-mariadb-0                    0/1       ContainerCreating   0          1m
-reeling-unicorn-wordpress-6b69994dd5-f4lqb   0/1       ContainerCreating   0          1m
-```
-
-```
-/opt/hejda/00_all-in-one # helm list
-NAME            REVISION        UPDATED                         STATUS          CHART           APP VERSION     NAMESPACE
-reeling-unicorn 1               Wed Nov 14 09:02:15 2018        DEPLOYED        wordpress-3.3.0 4.9.8           default  
-/opt/hejda/00_all-in-one # kubectl get pod o wide
-No resources found.
-Error from server (NotFound): pods "o" not found
-/opt/hejda/00_all-in-one # kubectl get pod -o wide
-NAME                                         READY     STATUS    RESTARTS   AGE       IP           NODE                         NOMINATED NODE
-reeling-unicorn-mariadb-0                    1/1       Running   0          24m       10.244.2.3   aks-aksallinone-12260899-0   <none>
-reeling-unicorn-wordpress-6b69994dd5-f4lqb   1/1       Running   1          24m       10.244.0.3   aks-aksallinone-12260899-1   <none>
-/opt/hejda/00_all-in-one # 
-```
-
-+ リリースの削除コマンド
-
-```
-# helm delete reeling-unicorn
-release "reeling-unicorn" deleted
-```
-
 
 + 確認
 
 ```
-# helm list
-# 
+$ kubectl get svc --namespace default -w iganari-wordpress
+NAME                TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
+iganari-wordpress   LoadBalancer   10.55.252.103   34.66.64.106   80:30084/TCP,443:30774/TCP   66s
+```
+
++ username と passwordの作成
+
+```
+$ echo Username: user
+Username: user
+
+$ echo Password: $(kubectl get secret --namespace default iganari-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --d
+ecode)
+Password: x7iJkLSTEG
+```
+
+```
+$ helm ls
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+iganari-wordpress       default         1               2019-11-29 13:36:37.990965003 +0900 +09 deployed        wordpress-8.0.1 5.3.0
+```
+
+
+
+
++ 結果
+  + ブラウザで `34.66.64.106` にアクセスして、 Wordpress を確認出来たのと `34.66.64.106/wp-login.php` で管理ページにログインが出来ることを確認
+  
+  
++ K8s 的な確認
+
+```
+$ kubectl get pod
+NAME                                READY   STATUS    RESTARTS   AGE
+iganari-wordpress-847ccd8f9-vlzlz   1/1     Running   0          6m10s
+iganari-wordpress-mariadb-0         1/1     Running   0          6m10s
+
+$ kubectl get service
+NAME                        TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
+iganari-wordpress           LoadBalancer   10.55.252.103   34.66.64.106   80:30084/TCP,443:30774/TCP   6m18s
+iganari-wordpress-mariadb   ClusterIP      10.55.240.38    <none>         3306/TCP                     6m18s
+kubernetes                  ClusterIP      10.55.240.1     <none>         443/TCP                      52m
+
+$ kubectl get deployment
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+iganari-wordpress   1/1     1            1           6m27s
+$
+```
+
+## リソース削除
+
++ リリースの確認
+
+```
+$ helm list
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+iganari-wordpress       default         1               2019-11-29 13:36:37.990965003 +0900 +09 deployed        wordpress-8.0.1 5.3.0
 ```
 ```
-# kubectl get pod -o wide
+$ helm uninstall iganari-wordpress
+release "iganari-wordpress" uninstalled
+```
+```
+$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+```
+
+
++ repo
+
+```
+$ helm repo list
+NAME    URL
+bitnami https://charts.bitnami.com
+```
+```
+$ helm repo remove bitnami
+"bitnami" has been removed from your repositories
+```
+```
+$ helm repo list
+Error: no repositories to show
+```
+
++ 確認
+
+```
+$ kubectl get pod
+No resources found.
+
+$ kubectl get service
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.55.240.1   <none>        443/TCP   63m
+
+$ kubectl get deployment
 No resources found.
 ```
