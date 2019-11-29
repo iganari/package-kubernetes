@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-balancer-example
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+  selector:
+    app.kubernetes.io/name: load-balacer-example

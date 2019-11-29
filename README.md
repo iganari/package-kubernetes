@@ -1,4 +1,4 @@
-# package-kubernetes
+# Package Kubernetes
 
 Kubernetesのサンプル集です
 
