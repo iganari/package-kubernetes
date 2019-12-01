@@ -12,19 +12,12 @@ WIP
     + https://github.com/helm/helm
 
 
-## HELMをインストールする
+## Helm をインストールする
 
 + 最新のリリース情報
     + https://github.com/helm/helm/releases
 
-+ 最新のタグを取得する
-
-```
-export latest_tag=$(curl 'https://github.com/helm/helm/releases.atom' | grep '<id>tag:github.com,2008:Repository/43723161/' | head -n1 | awk -F\/ '{print $3}' | sed 's/<//g')
-echo ${latest_tag}
-```
-
-+ スクリプトを使用して、最新のHELM(とtiller)をインストールする
++ スクリプトを使用して、最新の Helm をインストールします。
   + 参考: https://helm.sh/docs/intro/install/#from-script
 
 ```
@@ -33,46 +26,60 @@ chmod 0700 get_helm.sh
 ./get_helm.sh
 ```
 
-+ 意図した Helm のバージョンがインストール出来ているか確認する
-  + 2019/11/29 時点では v3.0.0 が最新バージョン
++ 意図した Helm のバージョンがインストール出来ているか確認します。
+  + 2019/11/29 時点では v3.0.0 が最新バージョンです。
 
 ```
 helm version
 ```
 ```
+### 例
+
 # helm version
 version.BuildInfo{Version:"v3.0.0", GitCommit:"e29ce2a54e96cd02ccfce88bee4f58bb6e2a28b6", GitTreeState:"clean", GoVersion:"go1.13.4"}
 ```
 
-## Helmの初期化
+## Helm を使って、 WordPress を起動してみる
 
 :warning: この時点でKubernetesと認証が通っている必要があります
 
-+ Podの確認
++ Pod の確認
+  + まだ Pod は何も起動していない想定です。
 
 ```
+kubectl get pod -o wide
+```
+```
+### 例
+
 # kubectl get pod -o wide
 No resources found in default namespace.
 ```
 
-+ コマンド
++ helm コマンドにて確認
+  + こちらもまだ何も登録されていない想定です。
 
 ```
 helm ls
 ```
 ```
+### 例
+
 # helm ls
 NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
 ```
 
-+ パブリック公開されている WordPress の chart(s) を helm コマンドで確認する 
++ WordPress の Charts を確認
+  + パブリック公開されている WordPress の chart(s) を helm コマンドで確認します。
   + GitHub: https://github.com/helm/charts/tree/master/stable/wordpress
 
 ```
 helm search hub wordpress
 ```
 ```
-$ helm search hub wordpress
+### 例
+
+# helm search hub wordpress
 URL                                                     CHART VERSION   APP VERSION     DESCRIPTION
 https://hub.helm.sh/charts/bitnami/wordpress            8.0.1           5.3.0           Web publishing platform for building blogs and ...
 https://hub.helm.sh/charts/presslabs/wordpress-...      v0.6.3          v0.6.3          Presslabs WordPress Operator Helm Chart
