@@ -1,7 +1,5 @@
 # Sample HELM
 
-WIP
-
 ## 公式ドキュメント
 
 + HELM
@@ -171,8 +169,13 @@ iganari-wordpress   LoadBalancer   10.55.247.62   35.223.131.61   80:30884/TCP,4
 
 + ブラウザでの確認
 
+![](./images/01.png)
 
-IMG
+![](./images/02.png)
+
+![](./images/03.png)
+
+![](./images/04.png)
 
 
 
