@@ -102,7 +102,7 @@ bitnami https://charts.bitnami.com
 
 ## WordPress を構築してみる
 
-ほぼ、デフォルトの状態で構築する
+### ほぼ、デフォルトの状態で構築する
 
 + WordPress のインストール
   + helm コマンドを用いて、 Chart から WordPress をインストールします。 
@@ -177,32 +177,22 @@ IMG
 
 
 + 結果
-  + ブラウザで `34.66.64.106` にアクセスして、 Wordpress を確認出来たのと `34.66.64.106/wp-login.php` で管理ページにログインが出来ることを確認
-  
-  
-+ K8s 的な確認
+  + ブラウザで `http://35.223.131.61` にアクセスして、 Wordpress を確認出来たのと `http://35.223.131.61/wp-login.php` で管理ページにログインが出来ることを確認出来ました
 
-```
-$ kubectl get pod
-NAME                                READY   STATUS    RESTARTS   AGE
-iganari-wordpress-847ccd8f9-vlzlz   1/1     Running   0          6m10s
-iganari-wordpress-mariadb-0         1/1     Running   0          6m10s
+### ユーザ名やパスワードをアレンジしてみる
 
-$ kubectl get service
-NAME                        TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
-iganari-wordpress           LoadBalancer   10.55.252.103   34.66.64.106   80:30084/TCP,443:30774/TCP   6m18s
-iganari-wordpress-mariadb   ClusterIP      10.55.240.38    <none>         3306/TCP                     6m18s
-kubernetes                  ClusterIP      10.55.240.1     <none>         443/TCP                      52m
+WIP
 
-$ kubectl get deployment
-NAME                READY   UP-TO-DATE   AVAILABLE   AGE
-iganari-wordpress   1/1     1            1           6m27s
-$
-```
+### HTTPS してみる
+
+WIP
 
 ## リソース削除
 
-+ リリースの確認
+試験が終わったらリソースを削除しておきましょう
+
++ リリースを削除
+  + リリースの確認 -> 削除 -> 確認と進みます
 
 ```
 $ helm list
@@ -219,7 +209,8 @@ NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
 ```
 
 
-+ repo
++ 自分で追加した Repository を削除
+  + Repository の確認 -> 削除 -> 確認と進みます
 
 ```
 $ helm repo list
@@ -235,16 +226,6 @@ $ helm repo list
 Error: no repositories to show
 ```
 
-+ 確認
+以上です 
 
-```
-$ kubectl get pod
-No resources found.
-
-$ kubectl get service
-NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.55.240.1   <none>        443/TCP   63m
-
-$ kubectl get deployment
-No resources found.
-```
+お疲れさまでした!! :raised_hands:
