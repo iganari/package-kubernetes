@@ -86,11 +86,28 @@ https://hub.helm.sh/charts/presslabs/wordpress-...      v0.6.3          v0.6.3  
 https://hub.helm.sh/charts/presslabs/wordpress-...      v0.7.3          v0.7.3          A Helm chart for deploying a WordPress site on ...
 ```
 
-+ helm コマンドで Wordpress をインストールする
++ Chat のレポジトリの追加
+  + helm コマンドで 使用したい Wordpress の Repository をインストールします。
 
 ```
 helm repo add bitnami https://charts.bitnami.com
-helm install bitnami/wordpress --version 8.0.1
+```
+```
+### 確認
+
+$ helm repo list
+NAME    URL                       
+bitnami https://charts.bitnami.com
+```
+
+## WordPress を構築してみる
+
+ほぼ、デフォルトの状態で構築する
+
++ WordPress のインストール
+  + helm コマンドを用いて、 Chart から WordPress をインストールします。 
+
+```
 helm install iganari-wordpress bitnami/wordpress --version 8.0.1
 ```
 ```
@@ -115,7 +132,7 @@ NOTES:
   echo Password: $(kubectl get secret --namespace default iganari-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
 ```
 
-+ 確認
++ 作成された WordPress の外部 IP アドレスの確認
 
 ```
 $ kubectl get svc --namespace default -w iganari-wordpress
@@ -123,23 +140,39 @@ NAME                TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)       
 iganari-wordpress   LoadBalancer   10.55.252.103   34.66.64.106   80:30084/TCP,443:30774/TCP   66s
 ```
 
-+ username と passwordの作成
++ password の作成
+  + 出力結果の通りのコマンドを実行します。
 
 ```
-$ echo Username: user
-Username: user
+$ echo Password: $(kubectl get secret --namespace default iganari-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+Password: 0FywWk90us
 
-$ echo Password: $(kubectl get secret --namespace default iganari-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --d
-ecode)
-Password: x7iJkLSTEG
+
+### Alpine Linux 上でコマンドを実行の際は --decode ではなく、 -d を使って下さい
+
+$ echo Password: $(kubectl get secret --namespace default iganari-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
 ```
+
++ helm コマンドを使って確認
 
 ```
 $ helm ls
 NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-iganari-wordpress       default         1               2019-11-29 13:36:37.990965003 +0900 +09 deployed        wordpress-8.0.1 5.3.0
+iganari-wordpress       default         1               2019-12-01 13:33:36.542685106 +0900 JST deployed        wordpress-8.0.1 5.3.0
 ```
 
++ 外部 IP アドレスの確認
+
+```
+kubectl get services iganari-wordpress
+NAME                TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+iganari-wordpress   LoadBalancer   10.55.247.62   35.223.131.61   80:30884/TCP,443:32320/TCP   27m
+```
+
++ ブラウザでの確認
+
+
+IMG
 
 
 
