@@ -18,21 +18,12 @@ jobs:
       with:
         ref: modify-readme-only
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: ls && pwd && which git
     - name: Run a multi-line script
       env:
-        SECRET_VARIABLE: ${{ secrets.user_email }}
+        SECRET_VARIABLE: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git status
-        git branch -a
-        git checkout modify-readme-only
-        git status
-        git branch -a
-        git config --global user.name "iganari"
-        git config --global user.email ${user_email}
-        git config -l
-        git feach master
-        git config core.ignorecase false
-        git merge origin master -m "test"
+        echo ${SECRET_VARIABLE}
+        echo ${GITHUB_TOKEN}
+        echo ${GITHUB_SHA}
         
