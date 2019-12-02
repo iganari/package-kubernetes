@@ -22,10 +22,11 @@ jobs:
       run: ls && pwd && which git
     - name: Run a multi-line script
       env:
-        SECRET_VARIABLE: ${{ secrets.VAR_TEST }}
+        SECRET_VARIABLE: ${{ secrets.user_email }}
       run: |
         git status
         git branch -a
         git checkout modify-readme-only
         git status
+        git config --global user.email ${user_email}
         git pull origin master
