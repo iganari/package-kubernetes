@@ -30,5 +30,6 @@ jobs:
         git status
         git config --global user.name "${user_name}"
         git config --global user.email "${user_email}"
+        git config -l
         git merge origin master -m "Pull Master Branch on modify-readme-only Branch"
         
