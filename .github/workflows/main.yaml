@@ -18,7 +18,9 @@ jobs:
       with:
         ref: modify-readme-only
 
-    - name: clone 
+    - name: clone
+      env:
+        SECRET_VARIABLE: ${{ secrets.user_email }}
       run: |
         git clone https://github.com/iganari/package-kubernetes.git /tmp/package-kubernetes
         cd /tmp/package-kubernetes
@@ -26,6 +28,6 @@ jobs:
         git checkout modify-readme-only
         git status
         git config --global user.name "iganari"
-        git config --global user.email "cigaguri@gmail.com"
+        git config --global user.email ${user_email}
         git merge origin master -m "test"
         
