@@ -33,7 +33,7 @@ jobs:
         git config --global user.email "${user_email}"
         # git config -l
         git fetch origin master
-        git merge origin master -m "Pull Master Branch on modify-readme-only Branch"
+        git merge master -m "Pull Master Branch on modify-readme-only Branch"
         
     - name: Deploy
       env:
