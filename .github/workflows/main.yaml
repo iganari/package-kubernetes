@@ -41,5 +41,6 @@ jobs:
         git status
         git branch -a
         touch /tmp/id_rsa
+        chmod 0700 /tmp/id_rsa
         echo ${DEPLOY_KEY} > /tmp/id_rsa
         sh ${GITHUB_WORKSPACE}/test.sh
