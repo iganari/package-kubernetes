@@ -23,7 +23,7 @@ jobs:
         VAR_NAME: ${{ secrets.user_name }}
         VAR_EMAIL: ${{ secrets.user_email }}
       run: |
-        pwd
+        # pwd
         git clone https://github.com/iganari/package-kubernetes.git /tmp/package-kubernetes
         cd /tmp/package-kubernetes
         ls
