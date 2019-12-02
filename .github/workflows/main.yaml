@@ -41,4 +41,4 @@ jobs:
         pwd
         git status
         git branch -a
-        sh ./test.sh
+        sh ${GITHUB_WORKSPACE}/test.sh
