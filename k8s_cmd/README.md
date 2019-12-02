@@ -105,3 +105,8 @@ kubectl delete pod [Pod名]
 ```
 kubectl delete -f [作成時のPod定義ファイル]
 ```
+
+## log の確認方法
+
+
+WIP
