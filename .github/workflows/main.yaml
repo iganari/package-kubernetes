@@ -16,11 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        ref: some-branch
-      run: ls
-    # - uses: actions/checkout@v1
-    # - name: Run a one-line script
-    #   run: ls && pwd && which git && git status && git remote -v
+        ref: modify-readme-only
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: ls && pwd && which git && git status && git remote -v
     - name: Run a multi-line script
       env:
         SECRET_VARIABLE: ${{ secrets.VAR_TEST }}
