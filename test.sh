@@ -2,5 +2,5 @@
 
 env
 
-
-echo ${user_name}
+echo "================================"
+echo "user name is ${user_name}"
