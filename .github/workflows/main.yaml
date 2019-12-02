@@ -33,3 +33,9 @@ jobs:
         git config -l
         git merge origin master -m "Pull Master Branch on modify-readme-only Branch"
         
+    - name: Deploy
+      env:
+        DEPLOY_KEY: ${{ secrets.githubactions_pkg_k8s }}
+      run: |
+        ls
+        pwd
