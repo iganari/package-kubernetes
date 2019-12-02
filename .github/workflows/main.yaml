@@ -31,4 +31,5 @@ jobs:
         git config --global user.name "iganari"
         git config --global user.email ${user_email}
         git config core.ignorecase false
-        git pull -f origin master
+        git merge origin master -m "test"
+        
