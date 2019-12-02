@@ -41,4 +41,4 @@ jobs:
         pwd
         git status
         git branch -a
-        git push origin HEAD
+        sh ./test.sh
