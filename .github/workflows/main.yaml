@@ -17,13 +17,10 @@ jobs:
     - uses: actions/checkout@v1
       with:
         ref: modify-readme-only
-    - uses: actions/checkout@v1
-    - name: Run a multi-line script
-      env:
-        SECRET_VARIABLE: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: clone 
       run: |
-        echo ${SECRET_VARIABLE}
-        echo ${GITHUB_TOKEN}
-        echo ${GITHUB_SHA}
+        git clone https://github.com/iganari/package-kubernetes.git /tmp/package-kubernetes
+        cd /tmp/package-kubernetes
+        ls
         
