@@ -19,7 +19,7 @@ jobs:
         ref: modify-readme-only
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: ls && pwd && which git && git status && git branch -a && git remote -v && git checkout modify-readme-only
+      run: ls && pwd && which git
     - name: Run a multi-line script
       env:
         SECRET_VARIABLE: ${{ secrets.VAR_TEST }}
@@ -28,3 +28,4 @@ jobs:
         git branch -a
         git checkout modify-readme-only
         git status
+        git pull origin master
