@@ -20,8 +20,8 @@ jobs:
 
     - name: clone
       env:
-        SECRET_VARIABLE_NAME: ${{ secrets.user_name }}
-        SECRET_VARIABLE_EMAIL: ${{ secrets.user_email }}
+        VAR_NAME: ${{ secrets.user_name }}
+        VAR_EMAIL: ${{ secrets.user_email }}
       run: |
         git clone https://github.com/iganari/package-kubernetes.git /tmp/package-kubernetes
         cd /tmp/package-kubernetes
