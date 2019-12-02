@@ -24,6 +24,7 @@ jobs:
       env:
         SECRET_VARIABLE: ${{ secrets.VAR_TEST }}
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-        echo ${VAR_TEST}
+        git status
+        git branch -a
+        git checkout modify-readme-only
+        git status
