@@ -28,6 +28,7 @@ jobs:
         git branch -a
         git checkout modify-readme-only
         git status
+        git config --global user.name "iganari"
         git config --global user.email ${user_email}
         git config core.ignorecase false
         git pull origin master
