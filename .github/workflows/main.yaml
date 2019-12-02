@@ -23,4 +23,9 @@ jobs:
         git clone https://github.com/iganari/package-kubernetes.git /tmp/package-kubernetes
         cd /tmp/package-kubernetes
         ls
+        git checkout modify-readme-only
+        git status
+        git config --global user.name "iganari"
+        git config --global user.email "cigaguri@gmail.com"
+        git merge origin master -m "test"
         
