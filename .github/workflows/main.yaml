@@ -39,3 +39,5 @@ jobs:
       run: |
         ls
         pwd
+        git status
+        git branch -a
