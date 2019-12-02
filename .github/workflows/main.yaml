@@ -38,8 +38,6 @@ jobs:
       env:
         DEPLOY_KEY: ${{ secrets.githubactions_pkg_k8s }}
       run: |
-        ls
-        pwd
         git status
         git branch -a
         sh ${GITHUB_WORKSPACE}/test.sh
