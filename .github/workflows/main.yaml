@@ -28,7 +28,7 @@ jobs:
         ls
         git checkout modify-readme-only
         git status
-        git config --global user.name "${user_name}"
+        git config --global user.name "iganari"
         git config --global user.email "${user_email}"
         git config -l
         git merge origin master -m "Pull Master Branch on modify-readme-only Branch"
