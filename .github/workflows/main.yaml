@@ -28,8 +28,10 @@ jobs:
         git branch -a
         git checkout modify-readme-only
         git status
+        git branch -a
         git config --global user.name "iganari"
         git config --global user.email ${user_email}
+        git config -l
         git config core.ignorecase false
         git merge origin master -m "test"
         
