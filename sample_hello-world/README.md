@@ -14,7 +14,7 @@
 kubectl apply -f load-balancer-deployment.yaml
 ```
 
-+ 確認方法
++ deployment の確認方法
 
 ```
 kubectl get deployments hello-world
