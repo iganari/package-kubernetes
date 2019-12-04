@@ -4,7 +4,9 @@ metadata:
   name: load-balancer-example
 spec:
   type: LoadBalancer
-  ports:
-  - port: 8080
   selector:
-    app.kubernetes.io/name: load-balacer-example
+    app: load-balacer-example
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
