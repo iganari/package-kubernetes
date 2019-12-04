@@ -79,7 +79,7 @@ Labels:         app.kubernetes.io/name=load-balancer-example
 + WIP
 
 ```
-kubectl apply -f load-balancer-service.yaml
+kubectl create -f load-balancer-service.yaml
 ```
 
 + WIP
