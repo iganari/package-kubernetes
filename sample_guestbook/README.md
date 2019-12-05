@@ -269,69 +269,107 @@ frontend   LoadBalancer   10.11.241.179   35.222.143.119   80:31859/TCP   64s
 
 ## ゲストブックの削除方法
 
-### フロントのサービスを削除する
+### 1. フロントのサービスを削除する
 
-+ :yen: `EXTERNAL-IP` は課金対象なので、使わない時は削除しておく
-
-```
-kubectl delete service frontend
-```
-
-+ 現在起動しているserviceを確認する
++ Service を削除します。
+  + :yen: `EXTERNAL-IP` は課金対象なので、使わない時は削除しておきましょう。
 
 ```
-kubectl get services
+kubectl delete -f 32_frontend-service.yaml
+```
+
++ Deployment を削除します。
+
+```
+kubectl delete -f 31_frontend-deployment.yaml
+```
+
+
++ 確認します。
+
+```
+### 例
+
+$ kubectl get deployment
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+redis-master   1/1     1            1           20m
+redis-slave    2/2     2            2           20m
 ```
 ```
 ### 例
 
-# kubectl get services
+$ kubectl get service
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+kubernetes     ClusterIP   10.11.240.1     <none>        443/TCP    22m
+redis-master   ClusterIP   10.11.250.36    <none>        6379/TCP   20m
+redis-slave    ClusterIP   10.11.242.178   <none>        6379/TCP   20m
+```
+
+
+### 2. ワーカーの Redis を削除する
+
++ Service を削除します。
+
+```
+kubectl delete -f 22_redis-slave-service.yaml
+```
+
++ Deployment を削除します。
+
+```
+kubectl delete -f 21_redis-slave-deployment.yaml
+```
+
++ 確認します。
+
+```
+### 例
+
+$ kubectl get deployment
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+redis-master   1/1     1            1           23m
+```
+```
+### 例
+
+$ kubectl get service
 NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-kubernetes     ClusterIP   10.0.0.1       <none>        443/TCP    26d
-redis-master   ClusterIP   10.0.62.191    <none>        6379/TCP   9m
-redis-slave    ClusterIP   10.0.205.159   <none>        6379/TCP   7m
+kubernetes     ClusterIP   10.11.240.1    <none>        443/TCP    24m
+redis-master   ClusterIP   10.11.250.36   <none>        6379/TCP   23m
 ```
 
-+ `service名` を指定して、削除する
 
+### 3. マスターの Redsis を削除する
+
++ Service を削除します。
 
 ```
-kubectl delete service ${service名}
+kubectl delete -f 12_redis-master-service.yaml
+```
+
++ Deployment を削除します。
+
+```
+kubectl delete -f 11_redis-master-deployment.yaml
+```
+
++ 確認します。
+
+```
+### 例
+
+$ kubectl get deployment
+No resources found.
 ```
 ```
 ### 例
 
-# kubectl delete service redis-master
-service "redis-master" deleted
-# kubectl get services
-NAME          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-kubernetes    ClusterIP   10.0.0.1       <none>        443/TCP    26d
-redis-slave   ClusterIP   10.0.205.159   <none>        6379/TCP   9m
+$ kubectl get service
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.11.240.1   <none>        443/TCP   26m
 ```
 
-+ 現在設定しているdeploymentを確認する
 
-```
-kubectl get deployments
-```
+以上です!!
 
-+ `deployment名` を指定して、削除する
-
-```
-kubectl delote deployment ${deployment名}
-```
-```
-### 例
-
-bash-4.4# kubectl get deployments
-NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-frontend       3         3         3            3           10m
-redis-master   1         1         1            1           16m
-redis-slave    2         2         2            2           13m
-bash-4.4# kubectl delete deployment frontend
-deployment.extensions "frontend" deleted
-bash-4.4# kubectl get deployments
-NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-redis-master   1         1         1            1           18m
-redis-slave    2         2         2            2           14m
-```
+お疲れさまでした!!:raised_hands:
