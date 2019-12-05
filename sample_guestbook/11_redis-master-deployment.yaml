@@ -1,8 +1,15 @@
-apiVersion: extensions/v1beta1
+# https://github.com/kubernetes/examples/blob/master/guestbook/redis-master-deployment.yaml
+
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-master
 spec:
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+      tier: backend
   replicas: 1
   template:
     metadata:
@@ -13,7 +20,7 @@ spec:
     spec:
       containers:
       - name: master
-        # image: gcr.io/google_containers/redis:e2e
+        # image: k8s.gcr.io/redis:e2e
         image: redis
         resources:
           requests:
