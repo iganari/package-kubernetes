@@ -169,8 +169,78 @@ kubectl get pods | grep frontend-
 kubectl create -f 32_frontend-service.yaml 
 ```
 
+### 4. それぞれを確認してみます
 
-### 4. ゲストブックのウェブサイトにアクセスする
++ Node の確認
+
+```
+kubectl get node
+or
+kubectl get node -o wide
+```
+```
+### 例
+
+$ kubectl get nodes
+NAME                                         STATUS   ROLES    AGE     VERSION
+gke-iganari-k8s-default-pool-4ddcd7bf-ds9t   Ready    <none>   6m1s    v1.13.11-gke.14
+gke-iganari-k8s-default-pool-ad8a4b26-b7pq   Ready    <none>   6m5s    v1.13.11-gke.14
+gke-iganari-k8s-default-pool-bf49f799-0mns   Ready    <none>   5m57s   v1.13.11-gke.14
+```
+
++ Pod の確認
+
+```
+kubectl get pods
+or
+kubectl get pods -o wide
+```
+```
+### 例
+
+$ kubectl get pods
+NAME                           READY   STATUS    RESTARTS   AGE
+frontend-857ff74f94-b75md      1/1     Running   0          5m47s
+frontend-857ff74f94-cxlk8      1/1     Running   0          5m47s
+frontend-857ff74f94-nwgzf      1/1     Running   0          5m47s
+redis-master-547db6dfd-zs7qh   1/1     Running   0          6m12s
+redis-slave-5945fb945d-8mjsp   1/1     Running   0          5m58s
+redis-slave-5945fb945d-nwlsr   1/1     Running   0          5m58s
+```
+
++ Deployment の確認
+
+```
+kubectl get deployment
+or
+kubectl get deployment -o wide
+```
+```
+$ kubectl get deployment
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+frontend       3/3     3            3           6m57s
+redis-master   1/1     1            1           7m22s
+redis-slave    2/2     2            2           7m8s
+```
+
++ Service の確認
+
+```
+kubectl get service
+or
+kubectl get service -o wide
+```
+```
+$ kubectl get service
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
+frontend       LoadBalancer   10.11.241.179   35.222.143.119   80:31859/TCP   8m6s
+kubernetes     ClusterIP      10.11.240.1     <none>           443/TCP        10m
+redis-master   ClusterIP      10.11.250.36    <none>           6379/TCP       8m29s
+redis-slave    ClusterIP      10.11.242.178   <none>           6379/TCP       8m17s
+```
+
+
+### 5. ゲストブックのウェブサイトにアクセスする
 
 + 実行状況確認コマンド
 
@@ -183,6 +253,13 @@ kubectl describe services frontend
 
 ```
 kubectl get service frontend
+```
+```
+### 例
+
+$ kubectl get service frontend
+NAME       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
+frontend   LoadBalancer   10.11.241.179   35.222.143.119   80:31859/TCP   64s
 ```
 
 + ブラウザから確認する
