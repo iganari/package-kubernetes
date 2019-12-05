@@ -31,26 +31,6 @@ NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 redis-master   1         1         1            1           28m
 ```
 
-+ :warning: デプロイメントの削除
-
-```
-kubectl delete deployment ${deployment名}
-```
-```
-### 例
-
-# kubectl get deployments
-NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-redis-master   1         1         1            1           28m
-redis-slave    2         2         2            0           5m
-# kubectl delete deployment redis-slave
-deployment.extensions "redis-slave" deleted
-# kubectl get deployments
-NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-redis-master   1         1         1            1           33m
-```
-
-
 + Podが正常に作成されているか確認する
 
 ```
