@@ -1,15 +1,10 @@
- ://github.com/kubernetes/examples/blob/master/guestbook/redis-slave-deployment.yaml
+## https://github.com/kubernetes/examples/blob/master/guestbook/redis-slave-deployment.yaml
 
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: redis-slave
 spec:
-  selector:
-    matchLabels:
-      app: redis
-      role: slave
-      tier: backend
   replicas: 2
   template:
     metadata:
