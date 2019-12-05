@@ -265,7 +265,7 @@ frontend   LoadBalancer   10.11.241.179   35.222.143.119   80:31859/TCP   64s
 + ブラウザから確認する
 
 
-![](../images/gb-01.png)
+![](./images/gb-01.png)
 
 ## ゲストブックの削除方法
 
