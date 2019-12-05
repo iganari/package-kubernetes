@@ -2,25 +2,17 @@
 
 ## 参考資料
 
+このドキュメントは以下の公式ドキュメントを実際にやってみるサンプルです。
+
 + [GKE] Redis と PHP を使用したゲストブックの作成
     + https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 
-## 流れ
-
-+ 作成
-    + [1. マスターのRedsisを用意する]()
-    + [2. ワーカーのRedisを設定する]()
-    + [3. フロントのPHPを設定する]()
-+ 削除
-    + hogehoge
-
-
 ## ゲストブックの作成方法
 
-### 1. マスターのRedsisを用意する
+### 1. マスターの Redsis を用意する
 
 
-+ マニュフェストファイルを指定して、マスターのRedisをデプロイする
++ マニュフェストファイルを指定して、マスターの Redis をデプロイします
 
 ```
 kubectl create -f 11_redis-master-deployment.yaml
