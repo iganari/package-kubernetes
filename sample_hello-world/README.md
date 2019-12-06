@@ -1,20 +1,20 @@
 # Hello World
 
-## 参考
+## これは何 ?
 
-公式ドキュメント
++ 公式ドキュメントにある Nginx を用いた Hello World を再現します
+  + https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
 
-https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
+## 実行方法
 
-## hogehoge
-
-+ 実行
++ deployment のデプロイ
+  + [load-balancer-deployment.yaml](./load-balancer-deployment.yaml)
 
 ```
 kubectl apply -f load-balancer-deployment.yaml
 ```
 
-+ 確認方法
++ deployment の確認方法
 
 ```
 kubectl get deployments hello-world
@@ -79,7 +79,7 @@ Labels:         app.kubernetes.io/name=load-balancer-example
 + WIP
 
 ```
-kubectl apply -f load-balancer-service.yaml
+kubectl create -f load-balancer-service.yaml
 ```
 
 + WIP

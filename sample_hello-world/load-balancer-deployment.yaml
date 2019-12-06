@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: hello-world
   labels:
     app.kubernetes.io/name: load-balacer-example
-  name: hello-world
 spec:
   replicas: 5
   selector:
@@ -15,7 +15,7 @@ spec:
         app.kubernetes.io/name: load-balancer-example
     spec:
       containers:
-      - image: gcr.io/google-samples/node-hello.:1.0
-        name: hello-world
+      - image: gcr.io/google-samples/node-hello:1.0
+        # name: hello-world
         ports:
         - containerPort: 8080

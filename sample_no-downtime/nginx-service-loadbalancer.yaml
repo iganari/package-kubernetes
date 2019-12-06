@@ -5,11 +5,10 @@ kind: Service
 metadata:
   name: nginx-serv-lb
 spec:
+  type: LoadBalancer
   selector:
     app: nginx-deployment
   ports:
   - protocol: TCP
     port: 8080
     targetPort: 80
-  type: LoadBalancer
-  
