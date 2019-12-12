@@ -2,6 +2,11 @@
 
 Kubernetes のサンプル集です
 
+## sample_hello-world
+
++ サンプル
+  + [sample_hello-world](./sample_hello-world/README.md)
+
 ## guestbook
 
 + サンプル
