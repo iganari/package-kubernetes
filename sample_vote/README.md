@@ -1,9 +1,15 @@
 # Sample Vote
 
-## 参考資料
+## 資料
 
-+ [AKS] Azure Kubernetes Service (AKS) でのアプリケーションの実行
-    + https://docs.microsoft.com/ja-jp/azure/aks/tutorial-kubernetes-deploy-application
+[AKS] Tutorial
+
++ Run applications in Azure Kubernetes Service
+  + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
+
++ GitHub
+  + https://github.com/Azure-Samples/azure-voting-app-redis.git
+
 
 ## 流れ
 
@@ -18,7 +24,7 @@
 
 ### 1. Redsisを用意する
 
-+ redisのdeployment作成
++ redis の deployment 作成
 
 ```
 kubectl create -f 11_back-redis-deployment.yaml
