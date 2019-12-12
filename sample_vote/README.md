@@ -4,13 +4,8 @@
 
 [AKS] Tutorial
 
-+ Prepare an application for Azure Kubernetes Service. (Azure Kubernetes Service (AKS) 用のアプリケーションの準備)
-  + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
-+ Deploy an Azure Kubernetes Service (AKS) cluster. (Azure Container Registry をデプロイして使用する)
-  + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster
-+ Run applications in Azure Kubernetes Service. (Azure Kubernetes Service (AKS) クラスターのデプロイ)
++ Run applications in Azure Kubernetes Service
   + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
-
 
 + GitHub
   + https://github.com/Azure-Samples/azure-voting-app-redis.git
