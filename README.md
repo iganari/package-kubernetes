@@ -6,6 +6,8 @@ Kubernetes のサンプル集です
 
 + サンプル
   + [sample_hello-world](./sample_hello-world/README.md)
++ 簡易説明
+  + WIP
 
 ## guestbook
 
