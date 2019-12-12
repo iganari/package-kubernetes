@@ -1,9 +1,20 @@
 # Sample Vote
 
-## 参考資料
+## 資料
 
-+ [AKS] Azure Kubernetes Service (AKS) でのアプリケーションの実行
-    + https://docs.microsoft.com/ja-jp/azure/aks/tutorial-kubernetes-deploy-application
+[AKS] Tutorial
+
++ Prepare an application for Azure Kubernetes Service. (Azure Kubernetes Service (AKS) 用のアプリケーションの準備)
+  + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
++ Deploy an Azure Kubernetes Service (AKS) cluster. (Azure Container Registry をデプロイして使用する)
+  + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster
++ Run applications in Azure Kubernetes Service. (Azure Kubernetes Service (AKS) クラスターのデプロイ)
+  + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
+
+
++ GitHub
+  + https://github.com/Azure-Samples/azure-voting-app-redis.git
+
 
 ## 流れ
 
@@ -18,7 +29,7 @@
 
 ### 1. Redsisを用意する
 
-+ redisのdeployment作成
++ redis の deployment 作成
 
 ```
 kubectl create -f 11_back-redis-deployment.yaml
