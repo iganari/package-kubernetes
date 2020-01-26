@@ -1,6 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: sample
+  name: sample_guestbook
   labels:
     name: sample_guestbook
