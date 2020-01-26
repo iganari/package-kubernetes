@@ -46,10 +46,6 @@ kubectl get pods --namespace=sample-vote
 
 ```
 kubectl get deployments --namespace=sample-vote
-
-or
-
-kubectl get deployments --namespace=sample-vote | grep vote | grep back
 ```
 
 + redisのserviceを起動
@@ -83,21 +79,13 @@ kubectl create -f 21_front-app-deployment.yaml
 + podsの確認
 
 ```
-kubectl get pods
-
-or
-
-kubectl get pods | grep vote | grep front
+kubectl get pods --namespace=sample-vote
 ```
 
 + deploymentの確認
 
 ```
-kubectl get deployments
-
-or
-
-kubectl get deployments | grep vote | grep front
+kubectl get deployments --namespace=sample-vote
 ```
 
 
@@ -112,22 +100,18 @@ kubectl create -f 22_front-app-service.yaml
 + redisのserviceを確認
 
 ```
-kubectl get service
-
-or
-
-kubectl get services | grep vote | grep front
+kubectl get services --namespace=sample-vote
 ```
 
 + serviceの実行状況確認コマンド その1
 
 ```
-kubectl describe services ${service名}
+kubectl describe services ${service名} --namespace=sample-vote
 ```
 ```
 ### 例
 
-# kubectl describe services azure-vote-front
+# kubectl describe services azure-vote-front --namespace=sample-vote
 Name:                     azure-vote-front
 Namespace:                default
 Labels:                   <none>
@@ -153,20 +137,22 @@ Events:
 
 
 ```
-kubectl get services ${service名}
+kubectl get services ${service名} --namespace=sample-vote
 ```
 ```
 ### 例
 
-# kubectl get services azure-vote-front
+# kubectl get services azure-vote-front --namespace=sample-vote
 NAME               TYPE           CLUSTER-IP   EXTERNAL-IP      PORT(S)        AGE
 azure-vote-front   LoadBalancer   10.0.5.154   23.100.100.206   80:31656/TCP   4m
 ```
 
 ### 3. ブラウザで確認する
 
+EXTERNAL-IP で表示されている IPアドレスをブラウザで確認する
 
-+ hogehoge
++ 例
+  + http://23.100.100.206
 
 
 ## 投票システムの削除方法
