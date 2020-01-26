@@ -4,6 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-master
+  namespace: sample_guestbook
 spec:
   selector:
     matchLabels:
