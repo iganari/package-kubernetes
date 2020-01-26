@@ -179,3 +179,15 @@ NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 azure-vote-back   ClusterIP   10.0.132.107   <none>        6379/TCP   10m
 kubernetes        ClusterIP   10.0.0.1       <none>        443/TCP    26d
 ```
+
+## リソース削除早見コマンド
+
+```
+kubectl delete --namespace=sample-vote -f 22_front-app-service.yaml
+kubectl delete --namespace=sample-vote -f 21_front-app-deployment.yaml
+
+kubectl delete --namespace=sample-vote -f 12_back-redis-service.yaml 
+kubectl delete --namespace=sample-vote -f 11_back-redis-deployment.yaml
+
+kubectl delete --namespace=sample-vote -f 01_namespace.yaml
+```
