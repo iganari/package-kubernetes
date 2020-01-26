@@ -39,21 +39,17 @@ kubectl create -f 11_back-redis-deployment.yaml
 + podsの確認
 
 ```
-kubectl get pods
-
-or
-
-kubectl get pods | grep vote | grep back
+kubectl get pods --namespace=sample-vote
 ```
 
 + deploymentの確認
 
 ```
-kubectl get deployments
+kubectl get deployments --namespace=sample-vote
 
 or
 
-kubectl get deployments | grep vote | grep back
+kubectl get deployments --namespace=sample-vote | grep vote | grep back
 ```
 
 + redisのserviceを起動
@@ -65,19 +61,20 @@ kubectl create -f 12_back-redis-service.yaml
 + redisのserviceを確認
 
 ```
-kubectl get service
-
-or
-
-kubectl get services | grep vote | grep back
+kubectl get services --namespace=sample-vote
 ```
+
+
+
+
+
+
+
 
 
 ### 2. フロントのアプリを作成する
 
-
 + フロントのdeploymentを作成する
-
 
 ```
 kubectl create -f 21_front-app-deployment.yaml
