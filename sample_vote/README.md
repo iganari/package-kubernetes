@@ -1,9 +1,15 @@
 # Sample Vote
 
-## 参考資料
+## 資料
 
-+ [AKS] Azure Kubernetes Service (AKS) でのアプリケーションの実行
-    + https://docs.microsoft.com/ja-jp/azure/aks/tutorial-kubernetes-deploy-application
+[AKS] Tutorial
+
++ Run applications in Azure Kubernetes Service
+  + https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
+
++ GitHub
+  + https://github.com/Azure-Samples/azure-voting-app-redis.git
+
 
 ## 流れ
 
@@ -16,9 +22,15 @@
 
 ## 投票システムの作成方法
 
++ Namespace を作る
+
+```
+kubectl create -f 01_namespace.yaml
+```
+
 ### 1. Redsisを用意する
 
-+ redisのdeployment作成
++ redis の deployment 作成
 
 ```
 kubectl create -f 11_back-redis-deployment.yaml
@@ -27,21 +39,13 @@ kubectl create -f 11_back-redis-deployment.yaml
 + podsの確認
 
 ```
-kubectl get pods
-
-or
-
-kubectl get pods | grep vote | grep back
+kubectl get pods --namespace=sample-vote
 ```
 
 + deploymentの確認
 
 ```
-kubectl get deployments
-
-or
-
-kubectl get deployments | grep vote | grep back
+kubectl get deployments --namespace=sample-vote
 ```
 
 + redisのserviceを起動
@@ -53,19 +57,20 @@ kubectl create -f 12_back-redis-service.yaml
 + redisのserviceを確認
 
 ```
-kubectl get service
-
-or
-
-kubectl get services | grep vote | grep back
+kubectl get services --namespace=sample-vote
 ```
+
+
+
+
+
+
+
 
 
 ### 2. フロントのアプリを作成する
 
-
 + フロントのdeploymentを作成する
-
 
 ```
 kubectl create -f 21_front-app-deployment.yaml
@@ -74,21 +79,13 @@ kubectl create -f 21_front-app-deployment.yaml
 + podsの確認
 
 ```
-kubectl get pods
-
-or
-
-kubectl get pods | grep vote | grep front
+kubectl get pods --namespace=sample-vote
 ```
 
 + deploymentの確認
 
 ```
-kubectl get deployments
-
-or
-
-kubectl get deployments | grep vote | grep front
+kubectl get deployments --namespace=sample-vote
 ```
 
 
@@ -103,22 +100,18 @@ kubectl create -f 22_front-app-service.yaml
 + redisのserviceを確認
 
 ```
-kubectl get service
-
-or
-
-kubectl get services | grep vote | grep front
+kubectl get services --namespace=sample-vote
 ```
 
 + serviceの実行状況確認コマンド その1
 
 ```
-kubectl describe services ${service名}
+kubectl describe services ${service名} --namespace=sample-vote
 ```
 ```
 ### 例
 
-# kubectl describe services azure-vote-front
+# kubectl describe services azure-vote-front --namespace=sample-vote
 Name:                     azure-vote-front
 Namespace:                default
 Labels:                   <none>
@@ -144,20 +137,22 @@ Events:
 
 
 ```
-kubectl get services ${service名}
+kubectl get services ${service名} --namespace=sample-vote
 ```
 ```
 ### 例
 
-# kubectl get services azure-vote-front
+# kubectl get services azure-vote-front --namespace=sample-vote
 NAME               TYPE           CLUSTER-IP   EXTERNAL-IP      PORT(S)        AGE
 azure-vote-front   LoadBalancer   10.0.5.154   23.100.100.206   80:31656/TCP   4m
 ```
 
 ### 3. ブラウザで確認する
 
+EXTERNAL-IP で表示されている IPアドレスをブラウザで確認する
 
-+ hogehoge
++ 例
+  + http://23.100.100.206
 
 
 ## 投票システムの削除方法
@@ -183,4 +178,16 @@ service "azure-vote-front" deleted
 NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 azure-vote-back   ClusterIP   10.0.132.107   <none>        6379/TCP   10m
 kubernetes        ClusterIP   10.0.0.1       <none>        443/TCP    26d
+```
+
+## リソース削除早見コマンド
+
+```
+kubectl delete --namespace=sample-vote -f 22_front-app-service.yaml
+kubectl delete --namespace=sample-vote -f 21_front-app-deployment.yaml
+
+kubectl delete --namespace=sample-vote -f 12_back-redis-service.yaml 
+kubectl delete --namespace=sample-vote -f 11_back-redis-deployment.yaml
+
+kubectl delete --namespace=sample-vote -f 01_namespace.yaml
 ```
