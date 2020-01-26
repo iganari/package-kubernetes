@@ -3,4 +3,4 @@ apiVersion: v1
 metadata:
   name: sample
   labels:
-    name: sample
+    name: sample_guestbook
