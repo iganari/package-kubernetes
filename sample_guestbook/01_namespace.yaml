@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: sample-guestbook
+  labels:
+    name: sample-guestbook
