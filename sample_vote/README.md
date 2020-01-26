@@ -22,6 +22,12 @@
 
 ## 投票システムの作成方法
 
++ Namespace を作る
+
+```
+kubectl create -f 01_namespace.yaml
+```
+
 ### 1. Redsisを用意する
 
 + redis の deployment 作成
