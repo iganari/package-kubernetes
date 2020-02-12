@@ -25,6 +25,5 @@ Kubernetes のサンプル集です
 
 ## その他のメモ
 
-Kubernetes Podcast
-
-+ https://kubernetespodcast.com/
++ Kubernetes Podcast
+  + https://kubernetespodcast.com/
