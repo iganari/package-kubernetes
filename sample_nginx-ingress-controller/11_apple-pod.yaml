@@ -2,6 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: apple-app
+  namespace: sample-nginx-ingress-controller
   labels:
     app: apple
 spec:
