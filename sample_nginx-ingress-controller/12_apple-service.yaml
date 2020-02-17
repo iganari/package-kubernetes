@@ -7,4 +7,5 @@ spec:
   selector:
     app: apple
   ports:
-    - port: 5678 # default port -> refs: https://hub.docker.com/r/hashicorp/http-echo/
+    - protocol: TCP
+      port: 5678 # default port -> refs: https://hub.docker.com/r/hashicorp/http-echo/
