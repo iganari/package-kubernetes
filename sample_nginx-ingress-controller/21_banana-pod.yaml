@@ -2,6 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: banana-app
+  namespace: sample-nginx-ingress-controller
   labels:
     app: banana
 spec:
