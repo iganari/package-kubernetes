@@ -64,3 +64,11 @@ banana-service   ClusterIP   10.31.250.194   <none>        5678/TCP   53s
 ```
 kubectl create -f 31-ingress.yaml --namespace=sample-nginx-ingress-controller
 ```
+
++ Check Ingress
+
+```
+# kubectl get ingress --namespace=sample-nginx-ingress-controller
+NAME             HOSTS   ADDRESS   PORTS   AGE
+example-ngress   *                 80      17s
+```
