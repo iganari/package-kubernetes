@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 
 # kind: Pod
 kind: Deployment
@@ -9,11 +9,17 @@ metadata:
   labels:
     app: apple
 spec:
-replicas: 1  
-template:
-  spec:
-    containers:
-      - name: apple-app
-        image: hashicorp/http-echo  # https://hub.docker.com/r/hashicorp/http-echo/
-        args:
-          - "-text=apple"
+  selector:
+    matchLabels:
+      fruits: apple
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        fruits: apple
+    spec:
+      containers:
+        - name: apple-app
+          image: hashicorp/http-echo  # https://hub.docker.com/r/hashicorp/http-echo/
+          args:
+            - "-text=apple"
