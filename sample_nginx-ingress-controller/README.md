@@ -68,7 +68,7 @@ kubectl create -f 31-ingress.yaml
 + Check Ingress
 
 ```
-# kubectl get ingress
+# kubectl get ingress --namespace=sample-nginx-ingress-controller
 NAME             HOSTS   ADDRESS   PORTS   AGE
 example-ngress   *                 80      17s
 ```
