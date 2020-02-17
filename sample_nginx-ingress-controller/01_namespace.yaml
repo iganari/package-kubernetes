@@ -1,4 +1,4 @@
-kind: Namaspace
+kind: Namespace
 apiVersion: v1
 metadata:
   name: sample-nginx-ingress-controller
