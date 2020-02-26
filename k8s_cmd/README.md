@@ -105,7 +105,18 @@ WIP
 + 公式ドキュメント
   + https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 
++ コマンドにて指定する場合
+
 コマンド | 説明
 :- | :-
 kubectl get namespace | 現在の環境の Namespace を確認する
 kubectl create -f hogehoge.yaml --namespace='insert-namespace-name-here' | 対象のオブジェクトを特定の Namespce に作成する 
+
++ YAML に書く場合
+  + metadata に記載する
+
+```
+metadata:
+  name: app
+  namespace: my-workspace  <--- これ
+```
