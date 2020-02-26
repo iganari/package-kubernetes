@@ -72,3 +72,7 @@ kubectl create -f 31-ingress.yaml
 NAME             HOSTS   ADDRESS   PORTS   AGE
 example-ngress   *                 80      17s
 ```
+
+## reference
+
+https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ingress-guide-nginx-example.html
