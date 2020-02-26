@@ -1,19 +1,8 @@
-# Sample Kubernetes Commands
+# Kubernetes Commands
 
-+ 事前にやること
-    + クラウドにログイン(マネージドを使っている場合)
-    + Kubernetesと認証を通す
-+ Nodeに関して
-+ Podに関して
-
-## 事前にやること
-
-+ 各クラウドの認証を通す
-    + GCP
-    + Azure
-    + AWS
-+ Kubernetesに対して、認証を通す
-    + WIP
++ あるのは大きく分けて 2 つ
+  + Kubernetes 特有のコマンド
+  + クラウド特有のもの
 
 ## Nodeに関して
 
@@ -110,3 +99,13 @@ kubectl delete -f [作成時のPod定義ファイル]
 
 
 WIP
+
+## Namespaces
+
++ 公式ドキュメント
+  + https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+コマンド | 説明
+:- | :-
+kubectl get namespace | 現在の環境の Namespace を確認する
+kubectl create -f hogehoge.yaml --namespace=<insert-namespace-name-here> | 対象のオブジェクトを特定の Namespce に作成する 
