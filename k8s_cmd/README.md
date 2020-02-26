@@ -108,4 +108,4 @@ WIP
 コマンド | 説明
 :- | :-
 kubectl get namespace | 現在の環境の Namespace を確認する
-kubectl create -f hogehoge.yaml --namespace=<insert-namespace-name-here> | 対象のオブジェクトを特定の Namespce に作成する 
+kubectl create -f hogehoge.yaml --namespace='insert-namespace-name-here' | 対象のオブジェクトを特定の Namespce に作成する 
