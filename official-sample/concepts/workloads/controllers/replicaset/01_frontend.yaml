@@ -1,0 +1,4 @@
+# refs: https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/controllers/frontend.yaml
+
+apiVersion: apps/v1
+kind: ReplicaSet
