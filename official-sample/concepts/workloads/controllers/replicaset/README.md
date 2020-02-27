@@ -8,3 +8,6 @@
 ```
 kubectl apply -f 01_namespace.yaml
 ```
+```
+kubectl create -f 11_frontend.yaml
+```

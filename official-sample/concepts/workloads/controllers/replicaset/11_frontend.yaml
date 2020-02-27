@@ -21,4 +21,4 @@ spec:
     spec:
       containers:
       - name: php-redis
-      images: gcr.io/gogle_samples/gb-frontenc:v3
+        image: gcr.io/gogle_samples/gb-frontenc:v3
