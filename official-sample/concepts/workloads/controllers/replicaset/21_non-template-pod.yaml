@@ -1,0 +1,28 @@
+# https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/pods/pod-rs.yaml 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  namespace: sample-replicaset
+  labels:
+    tier: frontend
+spec:
+  containers:
+  - name: hello1
+    image: gcr.io/google-samples/hello-app:2.0
+
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod2
+  namespace: sample-replicaset
+  labels:
+    tier: frontend
+spec:
+  containers:
+  - name: hello2
+    image: gcr.io/google-samples/hello-app:2.0
