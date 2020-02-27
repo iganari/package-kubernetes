@@ -22,3 +22,8 @@ Kubernetes のサンプル集です
   + [sample_vote](./sample_vote/README.md)
 + 簡易説明
   + Azureのサンプルチュートリアルを実施します。
+
+## その他のメモ
+
++ Kubernetes Podcast
+  + https://kubernetespodcast.com/
