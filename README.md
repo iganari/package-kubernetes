@@ -27,3 +27,7 @@ Kubernetes のサンプル集です
 
 + Kubernetes Podcast
   + https://kubernetespodcast.com/
+
+## GitHub Actions
+
+![](https://github.com/iganari/package-kubernetes/workflows/update-readme-branch/badge.svg)
