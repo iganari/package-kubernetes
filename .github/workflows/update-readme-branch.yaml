@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - master
-      - 'feature/add-actions-yaml'
+      # - 'feature/hogehoge'
       # - develop
 
 jobs:
