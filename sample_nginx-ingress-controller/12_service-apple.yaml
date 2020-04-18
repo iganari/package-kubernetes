@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apple-service
+  namespace: sample-nginx-ingress-controller
+spec:
+  type: NodePort
+  selector:
+    app: apple
+  ports:
+    - protocol: TCP
+      port: 5678 # default port -> refs: https://hub.docker.com/r/hashicorp/http-echo/

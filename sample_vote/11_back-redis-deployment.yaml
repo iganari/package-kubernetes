@@ -2,6 +2,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: azure-vote-back
+  namespace: sample-vote
 spec:
   replicas: 1
   template:
@@ -9,6 +10,8 @@ spec:
       labels:
         app: azure-vote-back
     spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
       containers:
       - name: azure-vote-back
         image: redis

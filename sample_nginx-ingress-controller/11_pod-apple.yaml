@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+
+# kind: Pod
+kind: Deployment
+
+metadata:
+  name: apple-app
+  namespace: sample-nginx-ingress-controller
+  labels:
+    app: apple
+spec:
+  selector:
+    matchLabels:
+      fruits: apple
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        fruits: apple
+    spec:
+      containers:
+        - name: apple-app
+          image: hashicorp/http-echo  # https://hub.docker.com/r/hashicorp/http-echo/
+          args:
+            - "-text=apple"

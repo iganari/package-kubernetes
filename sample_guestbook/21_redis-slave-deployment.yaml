@@ -4,6 +4,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: redis-slave
+  namespace: sample-guestbook
 spec:
   replicas: 2
   template:
