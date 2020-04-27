@@ -9,6 +9,11 @@ KubeInvaders
 + YouTube video
   + https://youtu.be/0NDAJ92tJkY
 
+### 資格試験
+
++ CKAD Exercises
+  + https://github.com/dgkanatsios/CKAD-exercises
+
 ## 参考ブログ
 
 ### ネットワーク系
