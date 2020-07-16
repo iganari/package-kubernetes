@@ -28,7 +28,7 @@ Kubernetes のサンプル集です
 + Kubernetes Podcast
   + https://kubernetespodcast.com/
 
-## Reverse lookup dictionary
+## Reverse Lookup List
 
 + WIP
 
