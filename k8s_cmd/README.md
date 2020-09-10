@@ -4,6 +4,10 @@
   + Kubernetes 特有のコマンド
   + クラウド特有のもの
 
++ 公式リファレンス
+  + https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
+
 ## Nodeに関して
 
 + Nodeの確認方法
@@ -81,6 +85,15 @@ kubectl get pods -o wide
 ```
 WIP
 ```
+
+### Pod の再起動方法
+
++ [kubectl rollout restart](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-restart-em-)
+
+說明 | コマンド
+:- | :-
+Deployment の再起動 | `kubectl rollout restart deployment/nginx`
+daemonset の再起動 | `kubectl rollout restart daemonset/abc`
 
 ### Podの削除方法
 
