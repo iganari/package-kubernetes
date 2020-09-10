@@ -10,24 +10,6 @@
 
 ## Nodeに関して
 
-+ Nodeの確認方法
-
-```
-WIP
-```
-
-+ Nodeの増やし方
-
-```
-WIP
-```
-
-+ Nodeの減らし方
-
-```
-WIP
-```
-
 ### Node確認方法
 
 + :whale: nodeの確認コマンド
@@ -44,11 +26,19 @@ aks-default-12260899-0   Ready     agent     52m       v1.11.2   10.240.0.4    <
 
 ### Nodeの増やし方
 
-+ 検討中 :bow:
+WIP
 
 ### Nodeの減らし方
 
-+ 検討中 :bow:
+WIP
+
+
+
+
+
+
+
+
 
 ## Podに関して
 
