@@ -42,24 +42,6 @@ WIP
 
 ## Podに関して
 
-+ Podの確認方法
-
-```
-WIP
-```
-
-+ Podの作成方法
-
-```
-WIP
-```
-
-+ Podの削除方法
-
-```
-WIP
-```
-
 ### Podの確認方法
 
 + :whale: podの確認コマンド
@@ -76,7 +58,7 @@ kubectl get pods -o wide
 WIP
 ```
 
-### Pod の再起動方法
+### Podの再起動方法
 
 + [kubectl rollout restart](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-restart-em-)
 
