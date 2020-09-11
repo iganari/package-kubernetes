@@ -82,10 +82,19 @@ kubectl delete -f [作成時のPod定義ファイル]
 
 ## log の確認方法
 
++ シングルコンテナな Pod の場合
+
 說明 | コマンド
 :- | :-
 現時点での pod のログを確認する | `kubectl logs ${pod_name}`
 リアルタイムで pod のログを標準出力に出す | `kubectl logs -f ${pod_name}`
+
++ 複数コンテナが入っている Pod の場合
+
+說明 | コマンド
+:- | :-
+現時点での pod のログを確認する | `kubectl logs ${pod_name} ${contaner_name}`
+リアルタイムで pod のログを標準出力に出す | `kubectl logs -f ${pod_name} ${contaner_name}`
 
 ## Namespaces
 
