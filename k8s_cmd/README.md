@@ -82,8 +82,10 @@ kubectl delete -f [作成時のPod定義ファイル]
 
 ## log の確認方法
 
-
-WIP
+說明 | コマンド
+:- | :-
+現時点での pod のログを確認する | `kubectl logs ${pod_name}`
+リアルタイムで pod のログを標準出力に出す | `kubectl logs -f ${pod_name}`
 
 ## Namespaces
 
