@@ -6,12 +6,12 @@ metadata:
   name: redis-master
   namespace: sample-guestbook
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: redis
       role: master
       tier: backend
-  replicas: 1
   template:
     metadata:
       labels:
