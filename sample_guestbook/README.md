@@ -7,6 +7,15 @@
 + [GKE] Redis と PHP を使用したゲストブックの作成
     + https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 
+## ソースコードの取得
+
++ ソースコードを取得し、ディレクトリに移動する
+
+```
+git clone https://github.com/iganari/package-kubernetes.git
+cd package-kubernetes/sample_guestbook
+```
+
 ## ゲストブックの作成方法
 
 ### 1. マスターの Redsis を用意する
