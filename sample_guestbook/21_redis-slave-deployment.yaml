@@ -1,12 +1,17 @@
 ## https://github.com/kubernetes/examples/blob/master/guestbook/redis-slave-deployment.yaml
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-slave
   namespace: sample-guestbook
 spec:
   replicas: 2
+  selector:
+  matchLabels:
+    app: redis
+    role: slave
+    tier: backend
   template:
     metadata:
       labels:
@@ -32,8 +37,4 @@ spec:
           # value: env
         ports:
         - containerPort: 6379
-
-
-
-
 

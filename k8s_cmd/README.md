@@ -4,25 +4,11 @@
   + Kubernetes 特有のコマンド
   + クラウド特有のもの
 
++ 公式リファレンス
+  + https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
+
 ## Nodeに関して
-
-+ Nodeの確認方法
-
-```
-WIP
-```
-
-+ Nodeの増やし方
-
-```
-WIP
-```
-
-+ Nodeの減らし方
-
-```
-WIP
-```
 
 ### Node確認方法
 
@@ -40,31 +26,21 @@ aks-default-12260899-0   Ready     agent     52m       v1.11.2   10.240.0.4    <
 
 ### Nodeの増やし方
 
-+ 検討中 :bow:
+WIP
 
 ### Nodeの減らし方
 
-+ 検討中 :bow:
+WIP
+
+
+
+
+
+
+
+
 
 ## Podに関して
-
-+ Podの確認方法
-
-```
-WIP
-```
-
-+ Podの作成方法
-
-```
-WIP
-```
-
-+ Podの削除方法
-
-```
-WIP
-```
 
 ### Podの確認方法
 
@@ -82,6 +58,15 @@ kubectl get pods -o wide
 WIP
 ```
 
+### Podの再起動方法
+
++ [kubectl rollout restart](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-restart-em-)
+
+說明 | コマンド
+:- | :-
+Deployment の再起動 | `kubectl rollout restart deployment/nginx`
+daemonset の再起動 | `kubectl rollout restart daemonset/abc`
+
 ### Podの削除方法
 
 + :whale: Podの削除
@@ -97,8 +82,19 @@ kubectl delete -f [作成時のPod定義ファイル]
 
 ## log の確認方法
 
++ シングルコンテナな Pod の場合
 
-WIP
+說明 | コマンド
+:- | :-
+現時点での pod のログを確認する | `kubectl logs ${pod_name}`
+リアルタイムで pod のログを標準出力に出す | `kubectl logs -f ${pod_name}`
+
++ 複数コンテナが入っている Pod の場合
+
+說明 | コマンド
+:- | :-
+現時点での pod のログを確認する | `kubectl logs ${pod_name} ${contaner_name}`
+リアルタイムで pod のログを標準出力に出す | `kubectl logs -f ${pod_name} ${contaner_name}`
 
 ## Namespaces
 

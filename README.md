@@ -28,6 +28,10 @@ Kubernetes のサンプル集です
 + Kubernetes Podcast
   + https://kubernetespodcast.com/
 
+## Reverse Lookup List
+
++ WIP
+
 ## GitHub Actions
 
 ![](https://github.com/iganari/package-kubernetes/workflows/update-readme-branch/badge.svg)
