@@ -1,6 +1,6 @@
 ## https://github.com/kubernetes/examples/blob/master/guestbook/redis-slave-deployment.yaml
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-slave
