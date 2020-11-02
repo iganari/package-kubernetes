@@ -18,6 +18,14 @@ cd package-kubernetes/sample_guestbook
 
 ## ゲストブックの作成方法
 
++ Namespace を作成する
+
+```
+kubectl create -f 01_namespace.yaml
+
+export _namespace=$(cat 01_namespace.yaml | grep name | awk 'NR==1 {print $2}')
+```
+
 ### 1. マスターの Redsis を用意する
 
 
@@ -30,7 +38,7 @@ kubectl create -f 11_redis-master-deployment.yaml
 + 作成したデプロイメントを確認する
 
 ```
-kubectl get deployments
+kubectl get deployments --namespace ${_namespace}
 ```
 ```
 ### 例
@@ -43,11 +51,11 @@ redis-master   1         1         1            1           28m
 + Podが正常に作成されているか確認する
 
 ```
-kubectl get pods
+kubectl get pods --namespace sample-guestbook
 
 or
 
-kubectl get pods | grep redis-master-
+kubectl get pods --namespace ${_namespace} | grep redis-master-
 ```
 ```
 ### 例
@@ -59,9 +67,8 @@ redis-master-698964bc87-289rt   1/1       Running   0          7m
 
 + マスターのRedisのログを眺める
 
-
 ```
-kubectl logs -f $(kubectl get pods | grep redis-master- | awk '{print $1}')
+kubectl logs -f $(kubectl get pods --namespace ${_namespace} | grep redis-master- | awk '{print $1}') --namespace ${_namespace}
 ```
 
 + マスターのRedisのサービスの起動をする
@@ -73,7 +80,7 @@ kubectl create -f 12_redis-master-service.yaml
 + サービスが作成されたことを確認する
 
 ```
-kubectl get service
+kubectl get service --namespace ${_namespace}
 ```
 ```
 ### 例
