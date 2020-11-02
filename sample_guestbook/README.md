@@ -336,6 +336,14 @@ kubectl delete -f 12_redis-master-service.yaml
 kubectl delete -f 11_redis-master-deployment.yaml
 ```
 
+### 4. Namespace を削除します
+
+```
+kubectl delete -f 01_namespace.yaml
+```
+
+### 5. 最後の確認
+
 + 確認します。
 
 ```
