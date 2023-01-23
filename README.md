@@ -2,6 +2,10 @@
 
 Kubernetes のサンプル集です
 
+## インストール方法
+
+[インストール方法](./install/README.md)
+
 ## sample_hello-world
 
 + サンプル
