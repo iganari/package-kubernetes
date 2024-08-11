@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-01
+spec:
+  template:
+    spec:
+      containers:
+      - name: job-01
+        image: debian:latest
+        command: ["echo",  "Hello World :)"]
+      restartPolicy: Never
+  backoffLimit: 4
