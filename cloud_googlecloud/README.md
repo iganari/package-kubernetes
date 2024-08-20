@@ -15,3 +15,9 @@ gcloud beta container clusters get-credentials ${_gke_cluster_name} \
   --region ${_gke_cluster_region} \
   --project ${_gc_pj_id}
 ```
+
+### エラーになる場合
+
+- gcloud を再インストールする
+- GCE は特にデフォルトで入っているが、それではなく、普通にインストールする
+  - TBD
